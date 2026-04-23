@@ -59,4 +59,9 @@ print(full_text)
 elapsed = time.time() - transcribe_start
 print(f"\n전사 소요 시간: {elapsed:.1f}초 ({elapsed/60:.1f}분)")
 
+output_file = f"transcript_{url_hash}.txt"
+with open(output_file, "w", encoding="utf-8") as f:
+    f.write(full_text.strip())
+print(f"\n파일 저장 완료: {output_file}")
+
 os.remove(audio_file)

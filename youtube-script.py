@@ -1,67 +1,76 @@
+import argparse
 import yt_dlp
-from faster_whisper import WhisperModel
+import subprocess
 import os
-import sys
-import time
-import hashlib
+from datetime import datetime
 
-if len(sys.argv) < 2:
-    print("사용법: python youtube-script.py [URL]")
-    sys.exit(1)
+def main():
+    parser = argparse.ArgumentParser(description="YouTube Whisper Transcription")
+    parser.add_argument("url", help="YouTube URL")
+    parser.add_argument("--language", default="auto", help="언어 코드 (기본: auto)")
+    parser.add_argument("--threads", type=int, default=6, help="CPU 스레드 수 (기본: 6)")
 
-url = sys.argv[1]
+    args = parser.parse_args()
 
-# URL 기반 고유 파일명 생성 (동시 실행 충돌 방지)
-url_hash = hashlib.md5(url.encode()).hexdigest()[:8]
-audio_file = f"temp_audio_{url_hash}.mp3"
-ydl_opts = {
-    'format': 'bestaudio/best',
-    'outtmpl': f'temp_audio_{url_hash}.%(ext)s',
-    'postprocessors': [{
-        'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'mp3',
-    }],
-    'quiet': True,
-    'remote_components': 'ejs:github',
-}
+    # ==================== 경로 설정 ====================
+    WHISPER_DIR = r"D:\PYTHON\youtube-script\whisper.cpp-windows-vulkan"
+    WHISPER_EXE = os.path.join(WHISPER_DIR, "whisper-cli.exe")
+    MODEL_PATH = os.path.join(WHISPER_DIR, "ggml-large-v3-turbo-q5_0.bin")
+    OUTPUT_DIR = r"D:\PYTHON\youtube-script\whisper-output"
+    # ==================================================
 
-print("오디오 다운로드 중...")
-with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-    ydl.download([url])
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-print("Whisper로 전사 시작... (CPU 모드)")
-transcribe_start = time.time()
+    # ★ base_name으로 깔끔하게 관리
+    base_name = os.path.join(OUTPUT_DIR, f"audio_{timestamp}")
+    audio_file = base_name + ".mp3"      # audio_20260426_000230.mp3
+    txt_file = base_name + ".txt"        # audio_20260426_000230.txt   ← 원하는 형태
 
-# AMD GPU라서 CPU로 실행 (가장 안정적)
-model = WhisperModel(
-    #"large-v3",           # 정확도 최고
-    "turbo",              # 속도 최적화 (대부분 영상에서 충분히 정확)
-    device="cpu",         # ← AMD라서 cpu로 고정
-    compute_type="int8"   # 메모리 적게 쓰고 속도 빠름
-)
+    print(f"🎬 YouTube 영상 다운로드 중...")
 
-segments, info = model.transcribe(
-    audio_file,
-    beam_size=5,
-    language=None,  # 자동 감지
-    vad_filter=True
-)
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'outtmpl': base_name,
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+        }],
+        'quiet': True,
+    }
 
-print("\n=== 전사 결과 ===\n")
-full_text = ""
-for segment in segments:
-    print(f"[{segment.start:.2f}s → {segment.end:.2f}s] {segment.text}")
-    full_text += segment.text + " "
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([args.url])
 
-print("\n=== 전체 스크립트 ===\n")
-print(full_text)
+    if not os.path.exists(audio_file):
+        print(f"❌ 오디오 파일을 찾을 수 없습니다: {audio_file}")
+        return
 
-elapsed = time.time() - transcribe_start
-print(f"\n전사 소요 시간: {elapsed:.1f}초 ({elapsed/60:.1f}분)")
+    print(f"🚀 Whisper 전사 시작... (language={args.language}, threads={args.threads})")
 
-output_file = f"transcript_{url_hash}.txt"
-with open(output_file, "w", encoding="utf-8") as f:
-    f.write(full_text.strip())
-print(f"\n파일 저장 완료: {output_file}")
+    cmd = [
+        WHISPER_EXE,
+        "-m", MODEL_PATH,
+        "-f", audio_file,
+        "--language", args.language,
+        "--threads", str(args.threads),
+        "--output-txt"
+    ]
 
-os.remove(audio_file)
+    result = subprocess.run(cmd, text=True)
+
+    if result.returncode == 0:
+        # whisper가 생성한 audio_xxx.mp3.txt → audio_xxx.txt 로 변경
+        wrong_txt = audio_file + ".txt"
+        if os.path.exists(wrong_txt):
+            os.rename(wrong_txt, txt_file)
+
+        print(f"\n✅ 전사 완료!")
+        print(f"📁 결과 파일: {txt_file}")
+    else:
+        print("❌ 에러 발생:")
+        print(result.stderr)
+
+
+if __name__ == "__main__":
+    main()

@@ -5,3 +5,4 @@
 *.bin
 whisper-output/audio_*.json
 .env
+*.pyc

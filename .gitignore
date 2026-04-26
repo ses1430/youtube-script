@@ -3,3 +3,5 @@
 *.txt
 *.dll
 *.bin
+whisper-output/audio_*.json
+.env

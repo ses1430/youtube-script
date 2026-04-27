@@ -86,6 +86,13 @@ def _format_duration(secs: float) -> str:
     return f"{h:02d}:{m:02d}:{s:02d}"
 
 
+def _dur_tag(secs: float) -> str:
+    """Return filename-safe duration string, e.g. '1h30m25s' or '30m25s'."""
+    h, rem = divmod(int(secs), 3600)
+    m, s = divmod(rem, 60)
+    return (f"{h}h{m:02d}m{s:02d}s" if h else f"{m}m{s:02d}s") if secs > 0 else "0s"
+
+
 def _emit_progress(q: queue.Queue, line: str, total: float) -> None:
     m = TIMESTAMP_RE.search(line)
     if m and total > 0:
@@ -103,7 +110,7 @@ def _stage(q: queue.Queue, stage: str) -> None:
 def _parse_and_save(json_path: str, txt_path: str) -> str | None:
     if not os.path.exists(json_path):
         return None
-    with open(json_path, encoding="utf-8") as f:
+    with open(json_path, encoding="utf-8", errors="replace") as f:
         data = json.load(f)
     segments = data.get("transcription", [])
     cleaned, prev = [], ""
@@ -131,16 +138,15 @@ def _run_whisper(job_id: str, audio_path: str, language: str,
     ]
     proc = subprocess.Popen(
         cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-        bufsize=1, cwd=BASE_DIR,
-        env={**os.environ, "PYTHONIOENCODING": "utf-8"}, encoding="utf-8",
+        bufsize=0, cwd=BASE_DIR,
     )
     jobs[job_id]["proc"] = proc
 
-    for line in proc.stdout:
+    for raw in proc.stdout:
         if stop.is_set():
             proc.kill()
             break
-        line = line.rstrip("\n")
+        line = raw.decode("utf-8", errors="replace").rstrip("\n")
         q.put(line)
         _emit_progress(q, line, total)
 
@@ -164,8 +170,9 @@ def run_job(job_id: str, params: dict) -> None:
         import yt_dlp
         with yt_dlp.YoutubeDL({"quiet": True, "no_warnings": True}) as ydl:
             info = ydl.extract_info(url, download=False)
-        title = info.get("title", "audio")
-        total = float(info.get("duration") or 0)
+        title    = info.get("title", "audio")
+        uploader = info.get("uploader") or info.get("channel") or "—"
+        total    = float(info.get("duration") or 0)
     except Exception as e:
         q.put(f"오류: {e}")
         jobs[job_id]["status"] = "error"
@@ -176,13 +183,28 @@ def run_job(job_id: str, params: dict) -> None:
     if total > 0:
         q.put(f"영상 길이: {_format_duration(total)}")
         q.put({"type": "duration", "seconds": total})
+    q.put({"type": "videoinfo", "title": title, "uploader": uploader})
 
     # 2. Download
     os.makedirs(AUDIO_DIR, exist_ok=True)
-    prefix     = ts_prefix()
-    stem       = prefix + sanitize(title)
+    ts         = datetime.now().strftime("%Y%m%d%H%M")
+    stem       = f"audio_{ts}_{_dur_tag(total)}"
     audio_path = unique_path(AUDIO_DIR, stem, ".mp3")
     stem_final = os.path.splitext(os.path.basename(audio_path))[0]
+
+    # Save key metadata fields
+    _META_KEYS = [
+        "id", "title", "uploader", "channel", "channel_url",
+        "duration", "upload_date", "webpage_url",
+        "view_count", "like_count", "categories", "tags",
+    ]
+    meta_path = os.path.join(AUDIO_DIR, stem_final + ".json")
+    try:
+        meta = {k: info[k] for k in _META_KEYS if info.get(k) is not None}
+        with open(meta_path, "w", encoding="utf-8") as mf:
+            json.dump(meta, mf, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
 
     _stage(q, "download")
     q.put(f"다운로드 중: {title}")
@@ -258,6 +280,19 @@ def run_file_job(job_id: str, file_path: str, params: dict) -> None:
     thr  = str(params.get("threads", 6))
 
     q.put(f"파일: {os.path.basename(file_path)}")
+
+    # Read metadata if available
+    meta_path = os.path.splitext(file_path)[0] + ".json"
+    title, uploader = "N/A", "N/A"
+    if os.path.exists(meta_path):
+        try:
+            with open(meta_path, encoding="utf-8") as mf:
+                meta = json.load(mf)
+            title    = meta.get("title") or "N/A"
+            uploader = meta.get("uploader") or meta.get("channel") or "N/A"
+        except Exception:
+            pass
+    q.put({"type": "videoinfo", "title": title, "uploader": uploader})
 
     total = get_file_duration(file_path)
     jobs[job_id]["total_duration"] = total

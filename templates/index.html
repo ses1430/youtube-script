@@ -269,6 +269,35 @@ select option { background: #1c2035; }
 
 .sep { border: none; border-top: 1px solid var(--border); }
 
+/* ── Toggle switch ── */
+.toggle-wrap { display: flex; align-items: center; gap: .5rem; }
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px; height: 20px;
+  flex-shrink: 0;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+.toggle-knob {
+  position: absolute; inset: 0;
+  background: var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.toggle-knob::before {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  left: 3px; top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform .2s;
+}
+.toggle-switch input:checked + .toggle-knob { background: var(--accent); }
+.toggle-switch input:checked + .toggle-knob::before { transform: translateX(16px); }
+.toggle-text { font-size: .82rem; color: var(--text); user-select: none; cursor: pointer; }
+
 /* ── Progress ── */
 .progress-section { display: none; flex-direction: column; gap: .45rem; }
 .progress-section.visible { display: flex; }
@@ -418,7 +447,7 @@ select option { background: #1c2035; }
 #log-area {
   flex: 1;
   overflow-y: auto;
-  padding: .9rem 1.2rem;
+  padding: .9rem 1.2rem 2.5rem;
   font-family: "Consolas", "Courier New", monospace;
   font-size: .78rem;
   line-height: 1.65;
@@ -432,7 +461,7 @@ select option { background: #1c2035; }
 #result-area {
   flex: 1;
   overflow-y: auto;
-  padding: .9rem 1.2rem;
+  padding: .9rem 1.2rem 2.5rem;
   font-size: .88rem;
   line-height: 1.85;
   color: var(--text);
@@ -551,7 +580,7 @@ select option { background: #1c2035; }
 #summary-area {
   flex: 1;
   overflow-y: auto;
-  padding: 1rem 1.2rem;
+  padding: 1rem 1.2rem 2.5rem;
   font-size: .9rem;
   line-height: 1.9;
   color: var(--text);
@@ -565,12 +594,36 @@ select option { background: #1c2035; }
   font-style: italic;
 }
 
+/* ── Video info bar ── */
+.video-info-bar {
+  flex-shrink: 0;
+  padding: .45rem 1.4rem;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.vi-title {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.vi-uploader {
+  font-size: .78rem;
+  color: var(--muted);
+}
+.vi-uploader:not(:empty)::before {
+  content: ' · ';
+  color: var(--border);
+}
+
 /* ── Stage bar ── */
 .stage-bar {
   display: none;
   flex-shrink: 0;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: .65rem 1.4rem;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -665,7 +718,6 @@ select option { background: #1c2035; }
 <header>
   <h1>▶ YouTube <em>Transcription</em></h1>
   <span class="tag">whisper.cpp</span>
-  <span class="tag" style="margin-left:auto">gemini-2.0-flash</span>
 </header>
 
 <div class="workspace">
@@ -719,6 +771,17 @@ select option { background: #1c2035; }
     <div class="field">
       <label>스레드 수</label>
       <input type="number" id="threads" value="6" min="1" max="32" />
+    </div>
+
+    <div class="field">
+      <label>완료 후 동작</label>
+      <div class="toggle-wrap">
+        <label class="toggle-switch">
+          <input type="checkbox" id="auto-summarize" checked>
+          <span class="toggle-knob"></span>
+        </label>
+        <span class="toggle-text" onclick="document.getElementById('auto-summarize').click()">AI 자동 요약</span>
+      </div>
     </div>
 
     <hr class="sep">
@@ -775,6 +838,12 @@ select option { background: #1c2035; }
           <span class="stage-lbl">완료</span>
         </div>
       </div>
+    </div>
+
+    <!-- Video info bar -->
+    <div class="video-info-bar" id="video-info-bar" style="display:none">
+      <span class="vi-title" id="vi-title"></span>
+      <span class="vi-uploader" id="vi-uploader"></span>
     </div>
 
     <!-- Tab bar -->
@@ -1023,6 +1092,9 @@ async function startTranscription() {
   document.getElementById('result-area').textContent = '';
   document.getElementById('summary-area').innerHTML = '<span class="summary-placeholder">요약이 여기에 표시됩니다.</span>';
   document.getElementById('summary-status').textContent = '';
+  document.getElementById('video-info-bar').style.display = 'none';
+  document.getElementById('vi-title').textContent = '';
+  document.getElementById('vi-uploader').textContent = '';
   switchTab('log');
   setRunning(true);
 
@@ -1069,6 +1141,14 @@ async function startTranscription() {
     document.getElementById('progress-label').textContent = '다운로드 중...';
   });
 
+  es.addEventListener('videoinfo', (e) => {
+    const { title, uploader } = JSON.parse(e.data);
+    const bar = document.getElementById('video-info-bar');
+    document.getElementById('vi-title').textContent = title || '';
+    document.getElementById('vi-uploader').textContent = (uploader && uploader !== 'N/A') ? uploader : '';
+    bar.style.display = title ? '' : 'none';
+  });
+
   es.addEventListener('stage', (e) => {
     const { stage } = JSON.parse(e.data);
     setStage(stage);
@@ -1096,8 +1176,12 @@ async function startTranscription() {
       showTab('result');
       showTab('summary');
       document.getElementById('result-badge').classList.add('visible');
-      switchTab('summary');
-      generateSummary();
+      if (document.getElementById('auto-summarize').checked) {
+        switchTab('summary');
+        generateSummary();
+      } else {
+        switchTab('result');
+      }
     } else if (result.status === 'cancelled') {
       appendLog('⏹ 전사가 중지되었습니다.');
     } else {

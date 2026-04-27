@@ -6,3 +6,5 @@
 whisper-output/audio_*.json
 .env
 *.pyc
+res/*.json
+temp.md

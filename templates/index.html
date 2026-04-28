@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+<script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');</script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +9,47 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:      #0d0f18;
-  --surface: #161926;
+  --bg:       #0d0f18;
+  --surface:  #161926;
   --surface2: #1c2035;
-  --border:  #252840;
-  --accent:  #6366f1;
-  --accent2: #4f46e5;
-  --text:    #e2e8f0;
-  --muted:   #64748b;
-  --success: #10b981;
-  --error:   #f43f5e;
-  --warn:    #f59e0b;
-  --sidebar: 300px;
+  --border:   #252840;
+  --accent:   #6366f1;
+  --accent2:  #4f46e5;
+  --text:     #e2e8f0;
+  --muted:    #64748b;
+  --success:  #10b981;
+  --error:    #f43f5e;
+  --warn:     #f59e0b;
+  --sidebar:  360px;
+  --log-bg:   #090b12;
+  --log-text: #8899b0;
+  --tag-bg:   #1a1d30;
+  --scrollbar-thumb: #2a2f4a;
+  --ghost-hover: #262c4a;
+  --pick-hover:  #2a3060;
+  --row-sel:     #2a1f5e;
+  --row-sel-hov: #32276e;
+  --err-banner:  #2d0a12;
+  --err-text:    #fca5a5;
+}
+
+[data-theme="light"] {
+  --bg:       #f5f6fa;
+  --surface:  #ffffff;
+  --surface2: #eef0f7;
+  --border:   #d5d9e8;
+  --text:     #1a1d2e;
+  --muted:    #6b7280;
+  --log-bg:   #f0f2f8;
+  --log-text: #4b5563;
+  --tag-bg:   #e4e7f3;
+  --scrollbar-thumb: #b0b8d0;
+  --ghost-hover: #e2e5f0;
+  --pick-hover:  #d4d8f5;
+  --row-sel:     #dde0f8;
+  --row-sel-hov: #cdd2f5;
+  --err-banner:  #fee2e2;
+  --err-text:    #991b1b;
 }
 
 html, body { height: 100%; overflow: hidden; }
@@ -43,9 +73,23 @@ header {
 }
 header h1 { font-size: 1rem; font-weight: 700; }
 header h1 em { color: var(--accent); font-style: normal; }
+.theme-btn {
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  width: 28px; height: 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: color .15s, border-color .15s;
+  flex-shrink: 0;
+}
+.theme-btn:hover { color: var(--text); border-color: var(--muted); }
 .tag {
   font-size: .68rem;
-  background: #1a1d30;
+  background: var(--tag-bg);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: .12rem .4rem;
@@ -80,6 +124,26 @@ header h1 em { color: var(--accent); font-style: normal; }
 .src-btn.active { background: var(--accent); color: #fff; }
 
 /* ── File pick ── */
+.url-wrap {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+.url-wrap input { flex: 1; min-width: 0; }
+.btn-paste {
+  flex-shrink: 0;
+  padding: .3rem .5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface2);
+  color: var(--text);
+  font-size: .82rem;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  line-height: 1;
+}
+.btn-paste:hover { background: var(--ghost-hover); border-color: var(--muted); }
+
 .file-pick-wrap {
   display: flex;
   align-items: center;
@@ -111,7 +175,7 @@ header h1 em { color: var(--accent); font-style: normal; }
   font-weight: 600;
   cursor: pointer;
 }
-.btn-pick:hover { background: #2a3060; }
+.btn-pick:hover { background: var(--pick-hover); }
 
 /* ── Modal ── */
 .modal-overlay {
@@ -208,8 +272,8 @@ header h1 em { color: var(--accent); font-style: normal; }
   color: var(--muted);
   font-size: .85rem;
 }
-.file-table tbody tr.selected td { background: #2a1f5e; }
-.file-table tbody tr.selected:hover td { background: #32276e; }
+.file-table tbody tr.selected td { background: var(--row-sel); }
+.file-table tbody tr.selected:hover td { background: var(--row-sel-hov); }
 .modal-footer {
   flex-shrink: 0;
   display: flex;
@@ -265,7 +329,7 @@ select {
   transition: border-color .15s;
 }
 input:focus, select:focus { border-color: var(--accent); }
-select option { background: #1c2035; }
+select option { background: var(--surface2); }
 
 .sep { border: none; border-top: 1px solid var(--border); }
 
@@ -389,9 +453,9 @@ select option { background: #1c2035; }
 #error-banner {
   display: none;
   flex-shrink: 0;
-  background: #2d0a12;
-  border-bottom: 1px solid #7f1d1d;
-  color: #fca5a5;
+  background: var(--err-banner);
+  border-bottom: 1px solid var(--error);
+  color: var(--err-text);
   padding: .5rem 1.2rem;
   font-size: .83rem;
 }
@@ -451,8 +515,8 @@ select option { background: #1c2035; }
   font-family: "Consolas", "Courier New", monospace;
   font-size: .78rem;
   line-height: 1.65;
-  color: #8899b0;
-  background: #090b12;
+  color: var(--log-text);
+  background: var(--log-bg);
   white-space: pre-wrap;
   word-break: break-all;
 }
@@ -488,7 +552,7 @@ select option { background: #1c2035; }
   transition: background .15s;
 }
 .btn-ghost  { background: var(--surface2); color: var(--text); }
-.btn-ghost:hover { background: #262c4a; }
+.btn-ghost:hover { background: var(--ghost-hover); }
 .btn-green  { background: var(--success); color: #fff; }
 .btn-green:hover { background: #059669; }
 .btn-purple { background: var(--accent); color: #fff; }
@@ -702,7 +766,7 @@ select option { background: #1c2035; }
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #2a2f4a; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
 
 /* ── Responsive ── */
 @media (max-width: 680px) {
@@ -718,6 +782,7 @@ select option { background: #1c2035; }
 <header>
   <h1>▶ YouTube <em>Transcription</em></h1>
   <span class="tag">whisper.cpp</span>
+  <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="라이트/다크 전환">◐</button>
 </header>
 
 <div class="workspace">
@@ -736,7 +801,10 @@ select option { background: #1c2035; }
     <div id="url-section">
       <div class="field">
         <label>YouTube URL</label>
-        <input type="text" id="url-input" placeholder="https://youtu.be/..." />
+        <div class="url-wrap">
+          <input type="text" id="url-input" placeholder="https://youtu.be/..." />
+          <button class="btn-paste" id="paste-btn" onclick="pasteUrl()" title="클립보드에서 붙여넣기">📋</button>
+        </div>
       </div>
     </div>
 
@@ -777,7 +845,7 @@ select option { background: #1c2035; }
       <label>완료 후 동작</label>
       <div class="toggle-wrap">
         <label class="toggle-switch">
-          <input type="checkbox" id="auto-summarize" checked>
+          <input type="checkbox" id="auto-summarize">
           <span class="toggle-knob"></span>
         </label>
         <span class="toggle-text" onclick="document.getElementById('auto-summarize').click()">AI 자동 요약</span>
@@ -1444,6 +1512,34 @@ function buildPayload() {
 document.getElementById('url-input').addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && currentSource === 'url') startTranscription();
 });
+
+/* ── Paste URL from clipboard ── */
+async function pasteUrl() {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById('url-input').value = text.trim();
+    const btn = document.getElementById('paste-btn');
+    btn.textContent = '✓';
+    setTimeout(() => { btn.textContent = '📋'; }, 1200);
+  } catch (e) {
+    document.getElementById('url-input').focus();
+  }
+}
+
+/* ── Theme toggle ── */
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('theme-btn').textContent = next === 'light' ? '☀' : '◐';
+}
+
+// Sync button icon with current theme
+(function() {
+  const theme = localStorage.getItem('theme') || 'light';
+  document.getElementById('theme-btn').textContent = theme === 'light' ? '☀' : '◐';
+})();
 </script>
 </body>
 </html>

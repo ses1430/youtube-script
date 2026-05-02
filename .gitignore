@@ -3,8 +3,9 @@
 *.txt
 *.dll
 *.bin
-whisper-output/audio_*.json
+whisper-output/*.*
 .env
 *.pyc
-res/*.json
 temp.md
+res/*
+

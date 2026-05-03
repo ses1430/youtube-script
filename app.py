@@ -35,7 +35,14 @@ WHISPER_EXE = os.path.join(BASE_DIR, "whisper.cpp-windows-vulkan", "whisper-cli.
 MODEL_PATH  = os.path.join(BASE_DIR, "whisper.cpp-windows-vulkan", "ggml-large-v3-turbo-q5_0.bin")
 FFPROBE_EXE = os.path.join(BASE_DIR, "ffprobe.exe")
 AUDIO_DIR   = os.environ.get("AUDIO_DIR", BASE_DIR)
+RES_DIR     = os.path.join(BASE_DIR, "res")
 AUDIO_EXT   = {".mp3", ".wav", ".m4a", ".ogg", ".flac", ".aac", ".opus", ".wma", ".mp4", ".webm"}
+
+
+def _dated_dir() -> str:
+    d = os.path.join(RES_DIR, datetime.now().strftime("%Y%m%d"))
+    os.makedirs(d, exist_ok=True)
+    return d
 
 DEFAULT_PROMPT = """\
 YouTube 영상의 전사 텍스트를 구조화된 요약본으로 재작성해줘.
@@ -245,13 +252,13 @@ def run_job(job_id: str, params: dict) -> None:
     q.put({"type": "videoinfo", "title": title, "uploader": uploader})
 
     # 2. Download
-    os.makedirs(AUDIO_DIR, exist_ok=True)
+    out_dir    = _dated_dir()
     ts         = datetime.now().strftime("%Y%m%d%H%M")
     stem       = f"audio_{ts}_{_dur_tag(total)}"
-    audio_path = unique_path(AUDIO_DIR, stem, ".mp3")
+    audio_path = unique_path(out_dir, stem, ".mp3")
     stem_final = os.path.splitext(os.path.basename(audio_path))[0]
 
-    meta_path = os.path.join(AUDIO_DIR, stem_final + ".json")
+    meta_path = os.path.join(out_dir, stem_final + ".json")
     try:
         meta = {k: info[k] for k in _META_KEYS if info.get(k) is not None}
         with open(meta_path, "w", encoding="utf-8") as mf:
@@ -310,7 +317,7 @@ def run_job(job_id: str, params: dict) -> None:
         return
 
     # 4. Parse → save
-    txt_path = unique_path(AUDIO_DIR, stem_final, ".txt")
+    txt_path = unique_path(out_dir, stem_final, ".txt")
     _finish_transcription(job_id, audio_path, rc, txt_path)
 
 
@@ -350,9 +357,17 @@ def run_file_job(job_id: str, file_path: str, params: dict) -> None:
         q.put(None)
         return
 
-    audio_dir = os.path.dirname(file_path)
-    stem      = datetime.now().strftime("%Y%m%d%H%M_") + os.path.splitext(os.path.basename(file_path))[0]
-    txt_path  = unique_path(audio_dir, stem, ".txt")
+    out_dir  = _dated_dir()
+    stem     = datetime.now().strftime("%Y%m%d%H%M_") + os.path.splitext(os.path.basename(file_path))[0]
+    txt_path = unique_path(out_dir, stem, ".txt")
+    try:
+        _fm = {"title": title if title != "N/A" else "",
+               "uploader": uploader if uploader != "N/A" else "",
+               "duration": total, "source_file": os.path.basename(file_path)}
+        with open(os.path.join(out_dir, stem + ".json"), "w", encoding="utf-8") as _mf:
+            json.dump(_fm, _mf, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
     _finish_transcription(job_id, file_path, rc, txt_path)
 
 
@@ -388,23 +403,37 @@ def index():
 @app.route("/files")
 def list_files():
     files = []
-    try:
-        for fname in os.listdir(AUDIO_DIR):
-            if os.path.splitext(fname)[1].lower() not in AUDIO_EXT:
-                continue
-            path = os.path.join(AUDIO_DIR, fname)
-            if not os.path.isfile(path):
-                continue
-            files.append({
-                "name":     fname,
-                "path":     path,
-                "size":     os.path.getsize(path),
-                "duration": get_file_duration(path),  # B1: 캐시 적용됨
-            })
-    except Exception as e:
-        return _json({"error": str(e)}, 500)
+    seen  = set()
+
+    def _scan(directory: str) -> None:
+        try:
+            for fname in os.listdir(directory):
+                if os.path.splitext(fname)[1].lower() not in AUDIO_EXT:
+                    continue
+                path = os.path.join(directory, fname)
+                if not os.path.isfile(path) or path in seen:
+                    continue
+                seen.add(path)
+                files.append({
+                    "name":     fname,
+                    "path":     path,
+                    "size":     os.path.getsize(path),
+                    "duration": get_file_duration(path),
+                })
+        except Exception:
+            pass
+
+    if os.path.isdir(RES_DIR):
+        for sub in sorted(os.listdir(RES_DIR), reverse=True):
+            sub_path = os.path.join(RES_DIR, sub)
+            if os.path.isdir(sub_path):
+                _scan(sub_path)
+
+    if AUDIO_DIR not in (BASE_DIR, RES_DIR):
+        _scan(AUDIO_DIR)
+
     files.sort(key=lambda x: x["name"].lower())
-    return _json({"files": files, "dir": AUDIO_DIR})
+    return _json({"files": files, "dir": RES_DIR})
 
 
 @app.route("/start", methods=["POST"])
@@ -545,6 +574,88 @@ def save_prompt():
     with open(PROMPT_FILE, "w", encoding="utf-8") as f:
         f.write(data.get("prompt", ""))
     return _json({"ok": True})
+
+
+@app.route("/history")
+def get_history():
+    items = []
+    if not os.path.isdir(RES_DIR):
+        return _json({"items": []})
+    try:
+        date_dirs = sorted(
+            [d for d in os.listdir(RES_DIR) if os.path.isdir(os.path.join(RES_DIR, d))],
+            reverse=True,
+        )
+    except Exception:
+        return _json({"items": []})
+    for date_dir in date_dirs:
+        date_path = os.path.join(RES_DIR, date_dir)
+        try:
+            fnames = sorted(os.listdir(date_path), reverse=True)
+        except Exception:
+            continue
+        for fname in fnames:
+            if not fname.endswith(".json"):
+                continue
+            json_path = os.path.join(date_path, fname)
+            stem      = os.path.splitext(fname)[0]
+            txt_path  = os.path.join(date_path, stem + ".txt")
+            try:
+                with open(json_path, encoding="utf-8") as f:
+                    meta = json.load(f)
+            except Exception:
+                continue
+            items.append({
+                "date":        date_dir,
+                "stem":        stem,
+                "title":       meta.get("title") or stem,
+                "uploader":    meta.get("uploader") or meta.get("channel") or "—",
+                "duration":    float(meta.get("duration") or 0),
+                "webpage_url": meta.get("webpage_url") or "",
+                "categories":  meta.get("categories") or [],
+                "tags":        meta.get("tags") or [],
+                "channel_url": meta.get("channel_url") or "",
+                "has_txt":     os.path.exists(txt_path),
+                "txt_path":    txt_path,
+            })
+    return _json({"items": items})
+
+
+@app.route("/history/text", methods=["POST"])
+def history_text():
+    data     = request.get_json(force=True)
+    txt_path = (data.get("txt_path") or "").strip()
+    abs_path = os.path.realpath(txt_path)
+    res_real = os.path.realpath(RES_DIR)
+    if not (abs_path.startswith(res_real + os.sep) or abs_path == res_real):
+        return _json({"error": "접근 거부"}, 403)
+    if not os.path.exists(abs_path):
+        return _json({"error": "파일 없음"}, 404)
+    try:
+        with open(abs_path, encoding="utf-8", errors="replace") as f:
+            return _json({"text": f.read()})
+    except Exception as e:
+        return _json({"error": str(e)}, 500)
+
+
+@app.route("/info", methods=["POST"])
+def video_info():
+    if yt_dlp is None:
+        return _json({"error": "yt-dlp not available"}, 400)
+    data = request.get_json(force=True)
+    url  = (data.get("url") or "").strip()
+    if not url:
+        return _json({"error": "URL 없음"}, 400)
+    try:
+        with yt_dlp.YoutubeDL({"quiet": True, "no_warnings": True}) as ydl:
+            info = ydl.extract_info(url, download=False)
+        return _json({
+            "title":    info.get("title") or "",
+            "uploader": info.get("uploader") or info.get("channel") or "",
+            "duration": float(info.get("duration") or 0),
+        })
+    except Exception as e:
+        return _json({"error": str(e)}, 400)
 
 
 if __name__ == "__main__":

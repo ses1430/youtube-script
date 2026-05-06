@@ -1107,6 +1107,17 @@ select option { background: var(--surface2); }
   word-break: break-all;
 }
 .hd-meta-val a:hover { text-decoration: underline; }
+.hd-path-row { align-items: center; gap: .35rem; flex-wrap: nowrap; }
+.hd-path-val {
+  font-family: monospace;
+  font-size: .72rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.hd-path-btn { padding: .15rem .5rem !important; font-size: .7rem !important; flex-shrink: 0; }
 .hd-tags-wrap {
   flex-shrink: 0;
   padding: .42rem 1.2rem;
@@ -1136,33 +1147,6 @@ select option { background: var(--surface2); }
   white-space: pre-wrap;
   word-break: break-word;
   margin: 0;
-}
-/* Tag count cell + floating tooltip */
-.ht-tags { text-align: center; white-space: nowrap; }
-.ht-tag-count {
-  display: inline-block;
-  background: var(--tag-bg);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: .1rem .42rem;
-  font-size: .72rem;
-  color: var(--muted);
-  font-family: monospace;
-  cursor: default;
-}
-.tag-tip-popup {
-  position: fixed;
-  z-index: 999;
-  pointer-events: none;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: .45rem .6rem;
-  box-shadow: 0 8px 28px rgba(0,0,0,.45);
-  max-width: 320px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .25rem;
 }
 
 /* ── Responsive ── */
@@ -1413,8 +1397,7 @@ select option { background: var(--surface2); }
               <col style="width:240px">
               <col style="width:240px">
               <col style="width:72px">
-              <col style="width:50px">
-              <col style="width:185px">
+              <col style="width:280px">
             </colgroup>
             <thead>
               <tr>
@@ -1423,7 +1406,6 @@ select option { background: var(--surface2); }
                 <th>업로더</th>
                 <th>카테고리</th>
                 <th style="text-align:right">길이</th>
-                <th class="ht-tags">태그</th>
                 <th>URL</th>
               </tr>
             </thead>
@@ -1610,10 +1592,6 @@ function _renderHistoryList() {
     const catCell  = (item.categories && item.categories.length)
       ? esc(item.categories[0])
       : '<span style="color:var(--muted)">—</span>';
-    const tagCount = item.tags ? item.tags.length : 0;
-    const tagCell  = tagCount > 0
-      ? `<span class="ht-tag-count" data-idx="${origIdx}">${tagCount}</span>`
-      : '<span style="color:var(--muted)">—</span>';
     const urlCell  = item.webpage_url
       ? `<a class="ht-url-link" href="${esc(item.webpage_url)}" target="_blank" rel="noopener" title="${esc(item.webpage_url)}" onclick="event.stopPropagation()" ondblclick="event.stopPropagation()">
            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -1629,17 +1607,10 @@ function _renderHistoryList() {
       <td>${uploaderCell}</td>
       <td>${catCell}</td>
       <td class="ht-num">${fmtDur(item.duration)}</td>
-      <td class="ht-tags">${tagCell}</td>
       <td class="ht-url">${urlCell}</td>
     </tr>`;
   }).join('');
 
-  tbody.querySelectorAll('.ht-tag-count').forEach(el => {
-    const idx  = parseInt(el.dataset.idx);
-    const tags = _historyItems[idx].tags || [];
-    el.addEventListener('mouseenter', (e) => _showTagTip(e, tags));
-    el.addEventListener('mouseleave', _hideTagTip);
-  });
 }
 
 function openHistoryDetail(idx) {
@@ -1663,6 +1634,13 @@ function openHistoryDetail(idx) {
     metaHtml += `<div class="hd-meta-row"><span class="hd-meta-key">길이</span><span class="hd-meta-val">${fmtDur(item.duration)}</span></div>`;
   if (item.webpage_url)
     metaHtml += `<div class="hd-meta-row"><span class="hd-meta-key">URL</span><span class="hd-meta-val"><a href="${esc(item.webpage_url)}" target="_blank" rel="noopener">${esc(item.webpage_url)}</a></span></div>`;
+  if (item.txt_path)
+    metaHtml += `<div class="hd-meta-row hd-path-row">
+      <span class="hd-meta-key">파일</span>
+      <span class="hd-meta-val hd-path-val" id="hd-path-text" title="${esc(item.txt_path)}">${esc(item.txt_path)}</span>
+      <button class="btn-sm btn-ghost hd-path-btn" onclick="copyFilePath()">경로 복사</button>
+      <button class="btn-sm btn-ghost hd-path-btn" onclick="openExplorer()">탐색기</button>
+    </div>`;
   document.getElementById('hd-meta-bar').innerHTML = metaHtml;
 
   const tagsWrap = document.getElementById('hd-tags-wrap');
@@ -1693,6 +1671,31 @@ function openHistoryDetail(idx) {
 
 function closeHistoryDetail() {
   document.getElementById('hd-modal').classList.remove('open');
+}
+
+function copyFilePath() {
+  const path = document.getElementById('hd-path-text').textContent;
+  navigator.clipboard.writeText(path).then(() => {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = '복사됨!';
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  });
+}
+
+async function openExplorer() {
+  const path = document.getElementById('hd-path-text').textContent;
+  try {
+    const r = await fetch('/history/explore', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({txt_path: path}),
+    });
+    const d = await r.json();
+    if (d.error) alert('오류: ' + d.error);
+  } catch (e) {
+    alert('오류: ' + e.message);
+  }
 }
 function closeHistoryDetailBg(e) {
   if (e.target === document.getElementById('hd-modal')) closeHistoryDetail();
@@ -2244,27 +2247,6 @@ function _showQTip(e, meta, url) {
 }
 function _hideQTip() { _qTip.style.display = 'none'; }
 
-/* 이력 태그 툴팁 */
-const _hTagTip = document.createElement('div');
-_hTagTip.className = 'tag-tip-popup';
-_hTagTip.style.display = 'none';
-document.body.appendChild(_hTagTip);
-
-function _showTagTip(e, tags) {
-  _hTagTip.innerHTML = tags.map(t => `<span class="hd-tag-chip">${esc(t)}</span>`).join('');
-  _hTagTip.style.display = 'flex';
-  const r  = e.currentTarget.getBoundingClientRect();
-  const tw = _hTagTip.offsetWidth;
-  const th = _hTagTip.offsetHeight;
-  let left = r.right + 8;
-  let top  = r.top + r.height / 2 - th / 2;
-  if (left + tw > window.innerWidth - 8) left = r.left - tw - 8;
-  if (top < 4) top = 4;
-  if (top + th > window.innerHeight - 4) top = window.innerHeight - th - 4;
-  _hTagTip.style.left = left + 'px';
-  _hTagTip.style.top  = top  + 'px';
-}
-function _hideTagTip() { _hTagTip.style.display = 'none'; }
 
 async function fetchVideoMeta(url) {
   try {

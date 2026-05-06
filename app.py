@@ -638,6 +638,24 @@ def history_text():
         return _json({"error": str(e)}, 500)
 
 
+@app.route("/history/explore", methods=["POST"])
+def history_explore():
+    data     = request.get_json(force=True)
+    txt_path = (data.get("txt_path") or "").strip()
+    abs_path = os.path.realpath(txt_path)
+    res_real = os.path.realpath(RES_DIR)
+    if not (abs_path.startswith(res_real + os.sep) or abs_path == res_real):
+        return _json({"error": "접근 거부"}, 403)
+    try:
+        if os.path.exists(abs_path):
+            subprocess.Popen(["explorer", f"/select,{abs_path}"])
+        else:
+            subprocess.Popen(["explorer", os.path.dirname(abs_path)])
+        return _json({"ok": True})
+    except Exception as e:
+        return _json({"error": str(e)}, 500)
+
+
 @app.route("/info", methods=["POST"])
 def video_info():
     if yt_dlp is None:

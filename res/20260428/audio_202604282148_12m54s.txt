@@ -1,0 +1,139 @@
+we're not going to get to human intelligence human level intelligence or super intelligence by
+scanning up LLMs or by even refining the paradigm there is a need for a change of paradigm and i've
+been saying this you know for a number of years now and i think we see we're starting to see the
+limits of the LLM paradigm a lot of people this year have been talking about agentic systems and
+basing agentic systems on LLMs is a recipe for disaster because how can a system possibly
+plan a sequence of actions if it can't predict the consequences of its actions right so if you
+want intelligent behavior you need a system to be able to anticipate and what's going to happen in
+the world and and also predict the consequences of its actions if you can do this then you can plan
+a sequence of actions to arrive at a particular objective and that's what's missing that's the
+concept of world model you don't have that in LLMs you're not going to get intelligent behavior
+without that you're not going to get efficient learning without that you're not going to get
+zero shot uh you know task solving so the first time you ask a 10 year old to solve a simple task
+they will do it without this is only being trained you know the first 10 hours that a 17 year old
+drives a car within 10 hours the 17 year old can drive the car uh we had millions of hours of training
+data to train autonomous autonomous cars and we still don't have level 5 autonomous driving so
+it tells you that the basic architecture is not is not there you've long argued that intelligence is
+not primarily about language but about understanding the physical and social world what is missing in
+today's dominant ai models and what kinds of architectures or learning paradigms are actually
+required to move closer to real intelligence if there is one idea about intelligence human or machine
+that you wish every world leader at davos truly understood what would it be okay the real world is way more
+more complicated than the world of language okay this is paradoxical because as humans we think language
+is sort of the epitome of human intelligence but it turns out predicting the next word in the text is not
+that complicated and you can accumulate a lot of knowledge in an LLF which is why they need to be so big
+and why you need to train them on so much data but real intelligence comes from an understanding of the real world
+unfortunately the real world is messy sensory data is high-dimensional continuous noisy and generative
+architectures do not work with this kind of data so the type of architecture that we use for LLMs
+generative AI does not apply to the real world the next revolution of AI which is coming fast is going
+to be a systems that understand the real world systems that understand artificial continuous noisy data like video
+like sensor data systems that can build predictive models of how the their environment and is is going to
+evolve and what their effect on the environment is systems that can plan they can reason at the core level
+systems that are controllable and safe so that you give them a task and they accomplish it okay so we're gonna we're gonna see us another AI revolution we've seen the deep learning revolution the
+NLM revolution now it's going to be the physical AI revolution if you will okay your new venture
+advanced machine intelligence this is a perfect transition to your next chapter uh you recently launched this company advanced machine
+intelligence um uh publicly it's reporting you suggest AMI is focusing on building a
+fundamentally new generation of AI systems based on world models systems that learn from video
+physical interaction and spatial data rather than language alone can you share more about the problem
+AMI AMI is trying to solve that today's leading systems cannot and realistically how long do you
+think it'll take to develop the architectures uh required for robust world models right so advanced
+machine intelligence we actually pronounce it abby okay that means friends of french this is actually the
+the name of the the research project that uh i i was kind of driving at at meta i was actually the
+individual contributor at fair i was the manager of nobody people worked on that
+project because they wanted to to work on it and wanted to work with me not because i was a boss
+which is the best situation in a research environment so uh not top down not top down bottom up that's the
+way research should should uh should take place a lot of people don't understand this but that's really
+the way it should it should work so uh we we've had this project for quite a long time at uh at fair uh
+advanced machine intelligence which is the name we gave to this idea of building an AI system that can learn from
+sensory data from video learn world models state of the world at time t action that the system imagine
+taking can you predict the state of the world at time t plus one that will result from this action
+if you have such a world model you can plan a sequence of actions to accomplish a test okay this
+is the blueprint i wrote a big vision paper 60 pages you can read just the beginning you will get
+an idea of it or you can listen to a talk i've i've given on this um which i i i put online in 2022
+where i explained where ai research should go in my opinion and with them we've been sort of
+building it since then and making a lot of progress we have systems now that we can train completely
+self-supervised on unlabeled videos and those systems understand video represented really well can
+predict missing parts in a video and they also have acquired a certain sense of common sense if you show
+them a video where something impossible happens they tell you this is impossible like you throw a ball in
+the air and the ball stops or it disappears prediction error goes to the roof because the system says like
+you know this is completely incompatible with what what i've observed during my training but we want
+to generalize the methodology so that it applies to any modality any data any sensor data so then we can
+build from data phenomenal phenomenological models of complex systems that perhaps we could control
+ultimately be it a industrial process of any kind manufacturing process a chemical plant a turbojet engine a whole
+airplane perhaps uh you know chemical reactions you know a cell a living cell so everything in the world
+is complicated because it's an emergent collective phenomenon of really complex systems we can only
+build phenological models of those things this is the idea of digital twin that i'm sure you've heard
+of right so people are sort of trying to kind of accurately model a physical system so you can simulate it
+the problem is that if you simulate the system too accurately you can't predict anything i could make i could
+explain everything that takes place in this room at the moment right now in terms of quantum field theory
+or something like that right but that would be completely impractical it would explain everything
+that takes place in this in this room including all of our thought process and everything right we
+could simulate everyone's brain but of course that's completely impractical the way we can understand
+what's taking place right now in this room is by it's through psychology maybe a little bit of science you know
+things like that economics maybe even uh but not at the level of quantum field theory or particle physics or
+atomic physics or molecules or proteins or organelles or cells or organisms right this is much higher level
+so the idea that you have to develop a an abstract representation of a phenomenon to allow you to make these predictions
+is absolutely crucial and generative models don't do that what is your advice to all the young people
+young people educators and workforce leaders in our audience about how best to prepare for an ai rich future
+so i think clearly technology progress is accelerating and what that means is that you know everyone who
+is studying right now is going to have to change job because technology evolves so quickly so what
+what students need to learn are fundamentals things that have a long shelf life will not be uh you know
+out of fashion in five years or ten years very fundamental thing i tell students if you you know
+if you if you study if you have a choice between taking a course in i don't know mobile uh
+app programming or quantum mechanics take quantum mechanics even if you're a computer scientist
+because the methods that you will learn doing this will allow you to learn to learn and also you'll have
+basic techniques you can reuse in all kinds of different uh contexts like how would you know in
+advance that all the underlying mathematics of machine learning basically comes from statistical physics
+right which is why there are so many physicists who do ai these days so learn fundamentals um learn to
+learn and then be ready to change expertise to change job so my last question is going to be what
+does 2035 look like um what what is uh the success and failure of of ai how what would you say
+it looks like in 2035 but before i do that i have uh five lightning questions i want to just answer
+real quick what is the most overrated idea in ai right now what's the most underrated research
+direction world models one book or thinker outside ai that most shaped how you think about intelligence
+okay frank daval uh unfortunately died recently he wrote a book are we intelligent enough to understand how
+intelligent animals are we think of intelligence as related to language it's not animals are really
+intelligent that's the kind of intelligence that we currently cannot reproduce with rasheeds read
+that book he's busy okay which leaders scientific corporate like david rubenstein um he's right over
+there uh or political do you think will most shape ai's trajectory over the next decade i'm not sure how to
+answer this okay here is an answer it will be it on all right last question the long view you have a rare
+depth of perspective on how ai evolves over decades if we look ahead 10 to 15 years to roughly 2035
+how many might our economies institutions and even forums like davos look meaningfully different
+from today because of ai what would success look like and what would failure look like so success would
+look would involve ai systems that understand the physical world but also perhaps reach something
+like human-like intelligence and of course in certain domains it's going to be more intelligent
+than humans because we know computers can do a lot of things better than humans so that would be
+success i imagine that will occur with some non-negligible likelihood within the next 10 years it's not
+going to happen next year it's not going to take two years unlike some of my more optimistic colleagues
+there's still a lot of work to do it's not going to be an event like it's so a lot of people are in
+their mind that you know there's going to be one secret to agi whatever they call it and the next
+day computers are going to take over the world this is ridiculous it never happens this way there's
+going to be a bunch of conceptual breakthroughs which are going to be in obscure research papers that
+nobody is going to pay attention to until five years later when someone demonstrates how powerful they
+are okay that's what happened with deep running to some extent that's what happened with transformers
+uh and also with lln so we're gonna we're gonna see this so you know read the papers that the
+scientific community pays attention to or or does not yet pay attention to because they're going to
+cause the revolution over the next five years and so what is they are going to to look like you know
+what is it going to look look like uh for 10 years from now we'll have those assistants uh you know
+assisting us at all times perhaps you know smart glasses adhesives the vision at meta or other wearable
+devices those systems are going to be assisting us amplifying our intelligence perhaps allowing us
+to make more rational decisions and intelligence is the commodity that is the most required in the world
+right so the purpose of increasing the total amount of intelligence on the planet i think is a very good
+one that's intrinsically good that's going to be under control our relationship with super intelligence
+systems is going to be the same relationship as a business academic or a political leader with their
+staff politicians certainly are surrounded by staff of people who are smarter than them right certainly
+true for professors too actually right our purpose is to make our students smarter than us and in business
+is the same thing too in research certainly um you know the best thing that can happen to you is work
+with uh with people who are smarter than you so okay in the last one let me ask you this five years ago and
+on this stage we had uh mirror will check um hold up a book that was written by chat gpt2
+i think it was one of the few times chat gpt2 was even mentioned in davos that that year five years ago
+a lot of people a lot of things that people were talking about in ai they predicted what's happening now was
+90 years away the last five years has moved really fast maybe not for you what are the next five years
+going to look like is it going to feel even faster and how can we all prepare um to thrive as a species
+and a society over this great change so it looks very different depending on whether you are you know
+in the trenches trying to kind of make science and technology progress whether it's conceptual
+breakthroughs that you realize not right away that they really are breakthroughs until you kind of
+start to make them work and and things like that uh but from the outside from the public what they see
+are discontinuous change right so the public saw chat gpt which was you know gpt3 whatever as a
+discontinuous change it wasn't the technology was developed over years before that a lot of labs had
+similar systems internally it's just that it became visible uh at that time before that uh the grant
+the DARPA grant challenge right uh that opened the eyes of the public to the possibility of self-driving
+Carl's. Ladies and gentlemen, Jan LeCun.

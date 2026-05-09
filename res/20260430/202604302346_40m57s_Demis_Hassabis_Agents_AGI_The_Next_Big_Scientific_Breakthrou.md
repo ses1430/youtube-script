@@ -1,0 +1,457 @@
+---
+title: Demis Hassabis: Agents, AGI & The Next Big Scientific Breakthrough
+uploader: Y Combinator
+channel: Y Combinator
+channel_url: https://www.youtube.com/channel/UCcefcZRL2oaA_uBNeo5UOWg
+duration: 2457
+upload_date: 20260429
+webpage_url: https://www.youtube.com/watch?v=JNyuX1zoOgU
+id: JNyuX1zoOgU
+categories:
+  - Science & Technology
+tags:
+  - YC
+  - Y Combinator
+---
+
+# Demis Hassabis: Agents, AGI & The Next Big Scientific Breakthrough
+
+continual learning, long-term reasoning, some aspects of memory, these are still unsolved.
+I think all of these are going to be required for AGI. Depending on what your AGI timeline is,
+you know, mine's like 2030 or something like this, then if you start off on a deep tech journey
+today, you have to just consider AGI appearing in the middle of that journey. It's not bad necessarily,
+but you have to take that into account. You have to have an active system that can actively solve
+problems for you to get to AGI. So agents are that path. And I think we're just getting going.
+Demis Hassabis has had one of the most unusual careers in tech. He was a chess prodigy as a kid,
+then designed his first hit video game theme park at 17. He then went back to school, got a PhD in
+cognitive neuroscience, published foundational work on how memory and imagination work in the brain.
+And then in 2010, co-founded DeepMind with one mission, solve intelligence. And I think they've
+done it since then. His lab has gone on to do things most people thought were decades away.
+AlphaGo beat a world champion at Go. AlphaFold cracked protein structure prediction,
+a 50-year grand challenge in biology, and they gave it away for free to every scientist on earth.
+That work won him the Nobel Prize in chemistry last year.
+Today, Demis leads Google DeepMind, where he's building Gemini and pushing toward the same goal he set
+when he was a teenager. Artificial general intelligence. Please welcome Demis Hassabis.
+So you've been thinking about AGI longer than almost anyone. When you look at the current paradigm,
+large-scale pre-training, RLHF, chain of thought, how much of the final architecture for AGI do you think
+we already have? And what's fundamentally missing right now?
+Well, first of all, thanks, Gary, for that great introduction. And it's great to be here. Thanks for welcoming here.
+It's an amazing space, actually. I'm going to have to come back here often. Very inspiring that you will get to work
+in this space. So the question is, I think the components that you just mentioned, I'm pretty sure will be part of
+the final architecture for AGI. So I think they've come such a long way now. And we've proven out so many things
+about what they can do. I can't see a world in which we will sort of realize in a
+couple of years this was a dead end. That doesn't make sense to me. But there still might be one or two
+things missing on top of what you've, you know, what we already know works. So continual learning,
+long-term reasoning, some aspects of memory, these are still unsolved. And how to get the systems to be
+more consistent across the board. I think all of these are going to be required for AGI. Now, it might be that
+the existing techniques can just scale up to that with some innovation and some incremental innovation.
+But it could be that there's still one or two big ideas left that need to be cracked. I don't think
+it's more than one or two, if there are out there. And I think, you know, my betting is about 50-50,
+if that's the case. So of course at DeepMind, at Google DeepMind, we work on both those things.
+I guess that's, I mean, working with a bunch of egensic systems, the wildest thing to me is to
+what degree, it's the same weights over and over. So this idea of continual learning is so interesting
+because like, you know, right now we're sort of cobbling it together with duct tape, you know,
+these dream cycles at night and things like that.
+Yeah. It's pretty cool, the dream cycles. And we used to think about this with consolidation with
+episodic memories. Actually, that's what I studied for my PhD is how the hippocampus works and
+integrates, you know, new knowledge gracefully into the existing knowledge base. So the brain does that
+amazingly well. It does it, you know, during sleep, especially things like REM sleep, replaying back
+episodes that are important so that you can learn from it. In fact, our very first Atari program,
+DQN, one of the ways it was able to master Atari games was by doing experience replay. So we sort of
+borrowed that from neuroscience and replayed successful trajectories many times, you know,
+that's way back in 2013 now in the dark ages of AI. It was a really important thing. And I agree with
+you, we're kind of using duct tape right now. So like shove it all in the context window.
+But this seems a bit unsatisfying, right? And actually, even though we're working on machines,
+not biological brains, and so potentially you could have, you know, millions or tens of millions
+size context window or memory, and it can be perfect, there's still a cost to looking it up
+and finding the right thing that's actually relevant for the specific decision you've got to make right
+now. And that's non-trivial, that cost, even if you can potentially store it all. I think
+there's actually a lot of room for innovation in areas like memory.
+Yeah. I mean, the wild thing is it feels like a million
+token context window is actually bigger than, I mean, it's plenty big, honestly, you can do so.
+Well, it's plenty big for most things that it should be used for. I mean, if you think about
+the context window is sort of equivalent to working memory, you know, humans have, we have like a few
+digits, you know, it's like a dozen digits, maybe, you know, average of seven, we got million or, you know,
+10 million context windows. But the problem is, is that we're trying to store everything in that,
+you know, things that are not important, things that are wrong. It's pretty brute force currently,
+and that doesn't seem right. And then the problem is, if you're now trying to try and process live
+video, and you're just going to naively record all the tokens, then actually a million tokens isn't
+that much. It's only like 20 minutes. So actually, you need more if you want something that's going to
+understand your, you know, your what's going on in your life over maybe a month or two.
+DeepMind has historically leaned into reinforcement learning and search. AlphaGo, AlphaZero and MuZero.
+How much of that philosophy is actually embedded in how you're building Gemini today? Is RL still underrated?
+Yeah, I think potentially it is. It sort of goes in ebbs and waves. You know, we've worked on agents since
+the beginning of DeepMind. In fact, that's what we said we were working on. So all of the Atari work and
+AlphaGo, most specifically, they're agent systems. And what we meant by that is systems that are able to,
+you know, accomplish goals on their own, and make active decisions and make plans. And so, of course,
+we were doing it in the domain of games to make it tractable and then doing increasingly complex games,
+things like StarCraft, AlphaGo, AlphaStar. So we basically did all the games that were out there.
+And then, of course, the question is, can you generalize those models to be world models or
+models of language, not just models of simple games or even complex games? And that's what the last few
+years has been about. But really, you can think of a lot of the things we're doing today,
+all the leading models with thinking modes and chain of thought reasoning as aspects of what was sort of
+pioneered with AlphaGo coming back now. And I actually think there's a lot of work we did back
+then that is relevant today. And we're sort of re-looking at some of those old ideas at scale today
+in a more general way, including things like Monte Carlo Tree Search and other ways of doing,
+augmenting the RL on top of the reinforcement learning we're ready to do today. And I think a lot of those
+ideas both from AlphaGo and AlphaZero are really relevant to where we are with today's foundation
+models. And I think a lot of that is what we're going to see of the advances the next few years.
+One question I would have, obviously, today you need bigger and bigger models to be smarter and smarter,
+but then we're also seeing distillation working. And then smaller models can be quite a bit faster.
+I think you guys have incredible Flash models that you're finding that they're 95% as good
+as the Frontier and at like one-tenth the price. Is that right?
+I think that's one of our core strengths is, I mean, you have to build the biggest models to have the
+Frontier capabilities. But I think one of our biggest strengths has been distilling and packing
+that power into smaller and smaller models very quickly. Obviously, we invented the kind of
+distillation process and people like Jeff and Oriel and others, and we're still world experts in that.
+And we also have a huge need to do it because we've got to serve the biggest probably AI surfaces there
+are. Obviously, there's search with AI overviews and AI mode, then there's Gemini app. And now,
+increasingly, every single product at Google has maps and YouTube and so on has some aspect of Gemini
+or Gemini-related technology in it. And so that's billions of users, more than a dozen billion user
+products. And they have to be served extremely fast, extremely efficiently and cheaply and with low
+latency. So that gives us a really important incentive to make these flash and even smaller models,
+flash light models, extremely efficient. And hopefully that ends up then being really useful for
+many of the workloads that all of you use for. I'm curious about how much smarter these smaller
+models can actually be. Like, are there limits to the distillation process? Like,
+could a 50B or 400B model be as smart as a mythos for today?
+Yeah, I don't think we've got to any kind of, or at least none of us know yet, if we've got to any
+kind of informational limit. I mean, maybe at some point that will be the case where there's just an
+information density that we can't get beyond. But I think for now, the assumption we make is that a year
+later after one of our leading pro models or frontier models goes out, half a year later, a year later,
+you'll have them in the really tiny, almost edge models. And you also see some of that goodness in
+our Gemma models, which hopefully you're all enjoying our Gemma 4 models, which I think are really amazing
+power for their sizes. So again, that uses a lot of these distillation techniques and the idea of how
+to make things really efficient in these very small models. So I didn't really see any limit yet,
+in terms of like some kind of theoretical limit. I think we're still pretty far off of that.
+That's amazing. I mean, that is really good because, you know, one of the weirder things that we're
+seeing right now is like engineers can do like 500 to 1,000 times the amount of work that they were
+doing like six months ago, I guess. I mean, the people in this room, there are people who are doing
+about like 1,000x the work that like, Steve Yagi talks about this. It's like 1,000x the work that a
+Google engineer from the 2000s was doing. I think it's very exciting. I mean, I think the small models have
+many uses. One is obviously cost, but the speed can allow, you know, if you think about coding even or
+other things, you can iterate a lot faster. Also, especially if there's, if you're collaborating with
+the system, I think there's a, there's a lot of need for having fast systems that maybe are not quite
+frontier. Like you said, like 95%, 90%, but that's plenty good enough and actually gain back more than
+the 10% on the iteration speed. So, and then the other big thing I think is running these things on the
+edge, again, for efficiency reasons, but also for privacy and security reasons too. If you think
+about different devices that you might run these systems on that, you know, process very personal
+information. You can also think about robotics as well. You know, robots in your house. I think you're
+going to want very efficient, very powerful local models, which may be orchestrated, you know, with some
+bigger models, frontier models that are in the, in the cloud, but you only delegate to that in certain
+circumstances. And perhaps you, you know, you process all of the audio visual feed, let's say, locally, and
+that stays local. I could imagine that would be a very good sort of end state.
+YC startup school is back. We're hand selecting the most promising builders in the world and flying them
+out to San Francisco for July 25th and 26th to discuss the cutting edge of tech. Apply now for a spot.
+Okay. Back to the video. Going back to context and memory, models currently stateless, but you know,
+continue, like what would the developer experience even be like for someone who's using a continual learning
+model? Like, you know, any idea, like how you'd steer it? I think it's really interesting. I think
+that's one of the, not having continual learning currently is one of the things holding back agents
+from doing full tasks. You know, I think they're really useful for aspects of tasks right now, and
+you can patch them together and do some really cool things, but they don't adapt well with the context
+that you're in. And I think that's the missing piece for them being really kind of fire and forget,
+and they'll figure it out themselves. You know, I think they need to be able to learn about the specific
+context that you're going to put them in. So I think we have to crack that to get full general
+intelligence. Where are we on reasoning? So models can do really impressive chain of thought now,
+but they still fail on things a smart undergrad wouldn't. What specifically needs to change and
+what progress do you expect in reasoning? There's a lot of innovation left in the thinking
+paradigms, I would say. Again, I think we're fairly, we're doing fairly simplistic things,
+fairly brute force. One could imagine, I think there's a lot of scope, for example, in monitoring
+the chain of thought, maybe interjecting midway through a thought process. I often get the impression
+with our systems and our competitor systems that they're almost overthinking. They're almost getting into
+sort of loops of things. Like one thing I sometimes like to do is play chess against Gemini. And you
+know, it's that all the leading foundation models are pretty poor at games, which is quite interesting.
+It's very cool to kind of look at the thinking traces, because obviously these can be a well understood,
+you know, I can tell quite quickly if it's going off on a tangent. And it's very sort of provable what the
+thinking is doing, whether it's useful or not. And so what we see is that, you know, sometimes it will
+it will consider a move, it will realize it's a blunder, but it can't find anything better. So it
+kind of goes back to that move and does it anyway. So, you know, you just shouldn't be seeing that
+happening in a very precise reasoning system. So there's just sort of huge gaps, I think still,
+but it may only be one or two tweaks that are required to fix those kind of gaps, just to be clear.
+But I think that's pretty, pretty obvious there are there. And that's why you get this kind of jagged
+intelligence. You know, on the one hand, it can solve gold medal problems in IMO, which is super hard.
+But on the other hand, as we've all seen, it can still make basic elementary math errors if you pose
+the question in a certain way. Right. So or elementary reasoning errors. So there's just something to me
+about the almost an introspection about its own thought process that I feel like there's something maybe
+missing there. Agents are really big. Some would say they're hyped. I personally think they're just
+getting started. Totally insane. What does DeepMind's internal research tell you about where agent
+capabilities actually are right now versus, you know, sort of the hype out there? I think we are.
+I agree with you. I think we're just at the beginning. You have to have an active system that can
+actively solve problems for you to get to AGI. That was always clear to us. So agents are that path.
+And I think we're just getting going. I think all of us are getting used to
+to how do we best work. And you're leading the way in a lot of this in your own personal
+experiments. And I saw many of you are doing that. I think how do you incorporate it into your
+workflow in a way that isn't just sort of a nice to have, but actually starting to do fundamental
+things? My impression is at the moment, we're all, you know, we're experimenting on lots of things,
+but we're only in that maybe the last couple of months starting to find the really valuable places.
+And the technology is probably only getting good enough for that to be the case,
+right? That it's not a kind of toy, nice demonstration, but actually really adding value
+to your time and efficiency. I'd often wonder, I see a lot of people working on like setting off,
+you know, dozens of agents for like 40 hours, but I'm not sure I've seen the output that yet of that
+quite justify that level of input going in, but I think it will come. So I still think we're in the
+experimentation phase. We haven't seen a AAA game that tops the app store charts that was sort of vibe
+coded yet. Right. I've seen, and I've programmed and I'm sure many, we've all done little nice
+demonstrations and it's like amazing. I can do a prototype, a theme park in half an hour now, which
+took me six months back when I was 17. It's kind of mind blowing. And I, and I wish I got this feeling
+if I spent the whole summer working on it, you could make something really incredible, but it still needs
+craft and, you know, human sort of soul into it and taste. I think that's, that's something that can,
+that's, you have to make sure you still bring that to, to whatever it is you're building. And I think it
+still shows like, it's not quite there yet because why haven't we seen a kid making a hit game that's,
+that sells 10 million copies, right? That should be possible given the effort that's gone in. So
+something's still somehow missing. Maybe it's to do with the process or maybe it's to do with the tools.
+I'm not quite sure. You all probably know better than me because I'm sure you're all experimenting on
+that, but I haven't seen the result yet, which I would expect once this is really delivering that full
+value, which I think will come in the next six to 12 months. Some of it is like, how much of it will
+be autonomous versus, I mean, I don't think we'd see autonomous first. We would actually probably see
+people in this room operating a thousand X and then. That's what you should see first. And then
+many of you, you know, there'll be like games companies or, you know, other types of companies that
+have built some kind of best-selling app, best-selling game using these tools. That's what you should see
+first. And then more of that will get automated. I mean, some of it is like, there's a human in there
+and then the human doesn't want to say that the, the agents did it yet. I think part of it might be
+though, that, um, this, if we want to discuss like creativity, what I often say about that is like,
+if we look at the things we've done like AlphaGo, so obviously very famously, you'll all know about the
+move 37 in game two. And for me, I was waiting for a moment like that to start the science projects
+like AlphaFold. So we started AlphaFold like the day we got back from Seoul, which is 10 years ago.
+Now I'm going to career after this to celebrate the 10 year anniversary of AlphaGo, but it's not enough
+to come up with move 37. Like that's pretty cool, very useful. Um, but can it invent Go?
+That's what I, I want a system that can invent Go if you give it a high level description, you know,
+like a game you could learn the rules of in five minutes, but it takes many lifetimes to master.
+It's beautiful aesthetically. Um, but you can play it in a few hours in an afternoon. So, you know,
+maybe you could imagine that would be the high level description I would give. And then I'd want the,
+the return, the thing I get back is Go. Right. And, um, clearly today's systems,
+I think can't do that. So the question is why. Um, and I think there's something still missing there.
+Well, someone in this room might, might make it.
+Then the answer would be, there's nothing missing. It just was the way we were using the systems. And that
+might actually be the answer. It might be that our today's systems are capable of that with a brilliant
+enough creative person using it and providing that impetus. That's the soul of the project and being
+able to probably being, uh, Oh, Fay enough with the tools to like almost be at one with the tools.
+I could imagine that would be happening if you experimented with the tools all day and all night,
+like probably many of you are doing that. And you combine that with proper deep creativity. Um,
+something, you know, more incredible could be done. Switching gears to open source. I mean,
+or open, open and open weights. I mean, the recent release of Gemma, you're making highly capable,
+open and accessible ones that can actually run locally. What do you think that means for your,
+will AI be something that is in the hands of the users instead of primarily in the cloud? And does that
+change who gets to, you know, build with these models?
+Models. We're huge proponents of, in general, of open source and open science. And you mentioned
+AlphaFold at the beginning, you know, we put that all out there for free and all of our science work,
+even still today, we publish in, you know, the big journals. We wanted to create, uh, world leading
+models for their, their sizes. Right. And so that's what hopefully we've done with Gemma and we're, you know,
+very committed to that path and hopefully you all experiment and build and enjoy using Gemma. I think
+it's been like 40 million downloads now and, uh, just in, you know, two and a half weeks. So we're
+really excited about that. And I also think it's important for there to be Western stacks on open
+source. You know, obviously a lot of the Chinese models are excellent and, and they're currently,
+we're leading in open source. And we think Gemma is very competitive for its sizes, uh, in, in all those
+respects. And for us, I mean, there is a question of resources, talent and compute. Like nobody has
+enough spare compute to just make two, you know, uh, frontier models at maximum size, right. With
+different attributes. So that's pretty difficult, but also for what, for now, what we've, we've decided
+is that our edge models, the things we want to use for Android and glasses and robotics, um, it's best
+that they're open models because they're vulnerable anyway on the set. Once you put them out on the
+surfaces. So they might as well be actually fully open. Right. So we've sort of made a decision to
+kind of unify that, uh, at the, at the kind of, we call it nano size level. And so that actually works
+for us, uh, strategically as well. Um, and you know, we hope as many people as possible build on it.
+And of course we'll be building on that too. Earlier, uh, before we came on, I got to show
+you a demo of, uh, my version of Samantha from her, which is harrowing for me to try to demo something to
+you. Um, and it worked, which is amazing. Gemini was built multimodal and I spent a lot of time
+with a bunch of the models and I mean, the depth of the context and the tool use with speech directly
+to model. Like there's nothing like. Bar none, like the best one. Actually. Yeah. Yeah. I think,
+I think that's just sort of still a slightly underappreciated aspect of, of, of the Gemini series is
+we, we started it being multimodal from the start. That made it a little bit more difficult actually to
+begin with because then just focusing on texts, for example, but we believe we're going to gain from
+that in the long run. And I think we're seeing that now for, uh, uh, things like world model building.
+So stuff like Genie that we build on top of Gemini, I think it's going to be really important for things
+like robotics. So this is why Gemini robotics, which many of you probably played around with,
+I think it's going to be built on multimodal foundation models, the robotics models.
+And, uh, we think we have a sort of competitive advantage with, with Gemini being so strong
+at multimodal. We're using it increasingly in things like Waymo. Um, but also if you imagine
+devices and assistance, uh, that digital assistants that come with you into the real world, you know,
+maybe on your phone or glasses or some other device, um, it needs to understand the physical world around
+you and intuitive physics, uh, and, and the, and the physical context you're in. And that's what our
+systems are extremely good at. And I think you found that's why you've enjoyed using it in your setup.
+We're planning to continue on that. And I think we're far and away the strongest models on, on those
+types of, uh, problems.
+So the cost of inference is, uh, dropping fast. What becomes possible when inference is essentially
+free and how does that change what your team is actually optimizing for?
+Yeah. I'm not sure inference will ever be essentially free. I mean, there's sort of
+Jevon's paradox and other things about like, I think we'll just end up using,
+all of us will end up using whatever we can get our hands on. And you can imagine, uh, millions of
+agents, swarms of agents working together on things. So that's one way to use the inference,
+or you could imagine, uh, single agents or groups, smaller groups of agents thinking
+for in multiple directions and then ensembling that. So we're experimenting with all these things.
+Probably many of you are, all of that will use up any inference. I think that's available. I mean,
+one day, maybe it can be almost cost zero. Certainly the energy, if we solve fusion or,
+you know, super conductors or, you know, optimal batteries or some set of those things,
+which I think we will do with material science, energy costs will be essentially zero, but there'll
+still be the physical creation of the chips and other things. There'll some, there'll be some bottleneck.
+Um, at least for the next few decades, I think. And so if that's the case, there'll still be
+rationing on the inference side. You'll still have to use it. I think efficiently.
+Yeah. Well, luckily the smaller models are getting smarter and smarter, which is fantastic.
+Yep. Uh, we got a lot of bio and biotech founders in the audience. I can see a few. AlphaO3 took us
+beyond proteins to a broad spectrum of biomolecules. Uh, how close are we to modeling full cellular systems,
+or is that still a fundamentally harder problem in a class of its own?
+Well, at isomorphic labs, which we spun out from, from, from, from DeepMind after we did AlphaFold2,
+um, it's, it's, which is going amazingly well. It's, it's, it's trying to build out, uh, not just AlphaFold,
+it's just one piece of the drug discovery process, uh, as many, you know, but we're trying to do the,
+the adjacent biochemistry and chemistry to design the right compounds with the right properties and so on.
+We'll have some big announcements for, you know, very soon to talk about on, on that front.
+I think that's going really well. Eventually you want a whole virtual cell. So I've talked about this
+in many of my science talks about a full working simulation of a cell that you can perturb. And then
+the, you know, the, the outputs of that would be close enough to experimental that it's useful,
+right? You could skip out a lot of the, the search steps and generate loss of synthetic data to
+train other models that then would predict things about, you know, real cells. And, um, I think we're
+about 10 years away, probably from something like a virtual cell, like a full virtual cell, you know,
+we're starting out, this is, we're working on the DeepMind side, science side on a, you know,
+virtual nucleus, cell nucleus first, because relatively self-contained. The trick with all of these
+things is can you pick a slice of the complexity, you know, eventually you want to, want to model a human
+body, but can you model it down to the right level of detail and what slice can you, uh, take out of
+it that will be self-contained enough. You can kind of model and approximate the inputs and outputs into
+that self-contained system, and then just focus on the self-contained system. So a nucleus is quite
+interesting from that perspective. Um, then the other issue is just, there's not enough data yet. So you need data. Uh, and I talk to
+various, you know, top scientists about who work on electron microscopes and other imaging things. If we
+could image a live cell without killing the cell, that would be, um, game changing, obviously, because then
+you could convert it into a vision problem, which we would know how to solve. Right. But at the moment,
+there are at least, I don't, I'm not aware of any techniques that can give you a kind of, you know,
+nanometer resolution, uh, but without destroying, but in, you know, in a live dynamic cell. So you can
+see all the interactions, right. You can take static images at that resolution, obviously, um, really
+detailed now, and that's quite exciting, but it's not enough, uh, to turn it just into, uh, just into a
+complex vision problem. So that's one way it could be solved. So it could be a hardware-driven data-driven
+solution, or it could be that we build better, uh, learned simulators of, uh, these dynamical systems.
+So that's, that's the more modeling way of solving it. Uh, you've been looking at all kinds of science,
+not just bio. Uh, there's material science, drug discovery, climate modeling, mathematics.
+If you had to rank which scientific domain will transform the most dramatically the next five years,
+what's in your list? Well, they're also exciting. And that's why, I mean, that, that for me has been
+my main passion and always the reason why I've worked on AI for my whole career for 30 plus years now
+is to use AI as the ultimate tool. I always thought AI would be the ultimate tool for science
+and to advance advanced scientific understanding, scientific discovery, and things like medicine,
+and just our understanding of the universe around us. So actually, when you mentioned our original
+way we used to articulate our mission statement, which is still, uh, the way we think about it is
+there was two steps to it. One was step one was solve intelligence, i.e. build AGI.
+And then step two was use it to solve everything else. We had to change that a bit over time because
+people were like, do you really mean solve everything else? And we did mean that. And I think people are
+sort of understanding what that means today, but specifically I was meaning solve other, what I call
+root node problems in science. So areas of science that would unlock whole new branches or avenues of
+discovery and alpha fold is the prototypical example of what we want to do. So over 3 million
+researchers around the world, pretty much every biology researcher in the world, uh, uses alpha fold now.
+And I was told by some of my, you know, pharma executive friends that, you know, almost every drug
+discovered from now on will have used alpha fold at some point in it, in the drug discovery process.
+So that's something we're very proud of. And it's the sort of impact that we hope to have with, with AI.
+But I do think it's just the beginning. I don't really see any area of science or engineering that
+science won't be able to help be helpful with. And the ones you mentioned, I think we're almost like
+an alpha fold one moment. So it's, we've got very promising results, but it's not quite solved
+the, the grand challenge yet in that domain. But I think we're going to have a lot to talk about
+in the next couple of years on all those areas. You mentioned materials, which I think is very
+exciting all the way to mathematics in science. I mean, it feels Promethean. It's like here is
+this capability. And I think so. I mean, of course, along with that, including what the, the parable
+of Prometheus, we have to also be careful with how we use that and what we use it for. And also the
+misuse, uh, that can happen with those same tools. A lot of people in this room are trying to build
+companies, applying AI to science for them. What's the difference between a startup that actually advances
+the frontier in your view versus one that's just wrapping an API around a foundation model and
+calling it AI for science? Well, look, I think that's one of the things I would recommend. I'm
+trying to think about, and I think you mentioned this to me before. What would I do today myself
+if I was sitting in your place and Y Combinator, you know, looking at things? One thing you have to
+do is obviously intercept where the AI tech is going. So that's one hard part of it. But I do think there's
+huge scope for combining where AI is going with some other deep technology area. I just think that that
+sweet spot is whether it's materials or medicine or other really hard areas of science. I think that
+those kinds of interdisciplinary teams, especially if it involves the world of atoms as well, there's not
+going to be a shortcut to that, at least in the foreseeable future. Those are areas that are pretty
+safe from just getting swarmed by whatever the next update is to the foundation models. So I think if
+you're looking for things like that, that's one of the more defensible areas, I would say. And I've
+always loved deep tech, so I'm kind of biased towards deep tech things. I think nothing that's really
+long lasting and worthwhile is easy. And so I'm always being drawn to deep technologies. Obviously, AI was
+like that back in 2010 when we started out, right? It was thought to just, we know it doesn't work kind
+of thing is what I was told by investors. And even in academia, it was considered to be a very niche
+subject that we sort of tried in the 90s and we know doesn't work. But if you, you know, if you have
+belief and conviction in your idea, why it's different this time, or what special combination from your
+background that you had, ideally your expert in both those areas, both the machine learning and the other
+area you're applying it to, or you can create a founding team with that expertise. I think there's huge
+impact to be made there and huge value to be built there. That's a really important message. I mean,
+even, I mean, it's hard, it's easy to forget. Like basically once you've done it, you've done it,
+but before you've done it, people are arrayed against you. Oh, sure. I mean, no one believes in it,
+which is why I think you've got to, you've also got to work in things that you're genuinely passionate
+about. Like for me, I would have worked on AI no matter what happened. I just decided from a very young
+age, it was the thing that could be the most consequential thing I could think of. It's turned
+out that way, but it might not, maybe we would have been 50 years too early. And it was also the most
+interesting thing I could think of working on. And so I would still be working on AI today, even if we
+were still, you know, in a little garage somewhere and it still wasn't quite working. I would have still
+been trying to find, maybe I'd have been back in academia or something, but I would have found some
+way of, of continuing to work on it. So, I mean, alpha was like an example of a spike
+that you pursued and it worked, you know, what makes the scientific domain ripe for an alpha fold
+style breakthrough? And is there a pattern, a certain objective function? Like the way I, I should write
+this up at some point when I have five minutes spare, but the lesson I've learned from all the alpha
+projects we've done specifically alpha go and alpha fold is, um, I think the techniques we have and the
+problems I look like to look for are great in, if this, if the situation can be described as massive
+combinatorial search space, the more massive, the better in some ways. So no brute force or special case
+algorithm will, will solve it. And that's true of go moves and of, you know, different configurations
+of proteins, far more than the atoms in the universe, both of those. And then, um, you have a clear
+objective function. So, you know, you could think of it as minimizing the free energy in the proteins or, you
+know, the winning the game of go. So you need to better specify your objective function clearly. So you can hill climb
+and then, um, enough data and or simulator that can generate you, uh, lots of, uh, in distribution, uh, uh,
+synthetic data. If those things are true, then I think, um, with today's methods, you can go a long way into tackling and finding the kind of needle in the haystack
+that you need, uh, to, for the solution that you're trying to look for. And I think of just drug discovery,
+by the way, in the same way, right? There is a compound out there that would solve this disease.
+If one could find it, if one could only find it, right. And that wouldn't have any side effects and so
+on. And, uh, as long as the laws of physics allows it, then the only question is how do you find it in an
+efficient way in a tractable way? I think we showed for the first time actually with alpha go that these
+systems could, uh, find those kinds of needles in a haystack in that case, you know, the perfect go move.
+I guess, uh, to get a little meta, I mean, we've, we're talking about humans using these methods to
+create alpha fold, but then there's a meta level, which is humans using AI to explore the space of
+possible hypotheses. How close are we to AI systems that can do genuine scientific reasoning, not just
+pattern matching on data. I think we're close. Um, we're working on these general systems like that,
+like I think we have this system called co-scientist and we have other algorithms like alpha evolve that can
+go a little bit beyond what the basic Gemini will do. And obviously all the frontier labs are
+experimenting in this way. I've yet to seen anything so far. And we, we all tinker with same things,
+you know, some math problems that are a little bit harder than IMO and so on. I haven't seen anything
+yet. Um, that is a true genuine, you know, massive discovery. That's my personal opinion. I think it's
+coming. I think it may be related to, uh, this earlier, this thing we discussed about creativity and,
+and actually going on beyond the bounds of what's known. So clearly that's just not pattern matching
+and matching at that point. Cause there's, there is no pattern to match to, and it's a bit more than
+extrapolation. It's some kind of analogical reasoning. And I don't think these systems have
+that, or at least we're not using them in the, in the right way to do that. So the way I often say that
+in science is, can it come up with a hypothesis that's really interesting and not just solve one.
+When I say just, we're now talking about just like solving the Riemann hypothesis or something. This
+would be obviously amazing. Well, one of the millennium prize problems, and maybe we're a couple
+of years out from doing that. Um, but I'd like to solve P equals NP. That's, that's my favorite one,
+but can you, but even harder than that would be to come up with a new set of, of millennium prize
+problems that were regarded by top mathematicians to be as, you know, deep and meaningful and worthy of
+lifetime of study and effort to solve. I think that's another level harder and, uh, we don't have,
+um, you know, I still don't think we know how to do that. I don't think it's, it's magical though.
+I do think these systems will be eventually be able to do that. Maybe we were missing one or two things.
+And then the way we would test that is, you know, sometimes call it my Einstein test, which is,
+you know, can you train a system with the knowledge of cutoff of 1901 and then will it come up with,
+you know, what Einstein did in 1905, including special relativity, you know, his Annus Mirabilis.
+Can it, can it do that? Right. Uh, and then I think we could run that test. Maybe,
+maybe we should just run that test and keep seeing if that's possible. And once that is,
+then I think we're on the verge of these systems being able to invent something new, truly novel.
+So last, last question for the people who are deeply technical in
+this room, who want to work on something, you know, even close to the scale that what you've
+created with, you know, it's one of the largest AI efforts in the world. And you've been a pioneer
+for all these years. So for that, I think everyone in this room, thanks you and the folks at DeepMind
+very, very deeply from the bottom of our hearts. Thank you.
+What's the thing that you know now about building at the frontier that you wish you'd known at 25?
+I think we covered some of it in terms of actually you, you work out that going after hard problems and
+deep problems, um, it's no more difficult in some ways than going after a shallower, simpler, more
+superficial problem. They're, they're just differently difficult. There's different things that are hard
+about each of those things. But I think given life's very short and you know, you only have so much time
+and energy, you might as well put your life force into something that will really make a difference
+if you hadn't done it, if you hadn't been there to push it. So I would just think of it through that
+lens. And then the other thing is if you're, if you are, and we talked about deep tech, and I love
+interdisciplinary work. And I think that's going to be even more prevalent in the next few years in
+combinations of fields and finding the connections between those fields. And it's going to be even
+easier to do that with AI. And then the only other thing I would say is if, you know, if you have your,
+depending on what your AGI timeline is, you know, mine's like 2030 or something like this, then if you
+start off on a deep tech journey today, usually that you're talking about a 10 year journey for true
+deep tech, in my opinion. So then now you have to just consider AGI appearing in the middle of that
+journey. So what does that mean? It doesn't, it's not bad necessarily, but you have to take that into
+account, right? To will it be able to leverage it? What will the AGI system do with it? And it goes a
+little bit back to what you said earlier about alpha fold and general AI systems. So one thing I can
+think see happening is Gemini, Claude, or one of these general systems making use of alpha fold,
+like specialized systems as tools. I don't think we're going to have it just in one giant brain
+because it will have too much regression in, if I put all the proteins into, you know, Gemini,
+that wouldn't make sense. We don't need Gemini to do protein folding. Going back to your information
+efficiency, it would definitely affect its language skills or something like that, right? In a bad way.
+So much better, I think, is to have really good general purpose tool usage models that will then,
+maybe they could even train those specific tools, but they would be in a separate system.
+So I think that's kind of interesting to think through the implications of that and then what
+you might build today. Also physical things too, like what kinds of factories would you build?
+What sorts of, you know, finance systems and so on. So I just think you need to really take that
+seriously. And on the one hand is like, and imagine what that world would look like and then build
+something that would be useful if that comes in halfway through.
+Demis and Sabis, everyone.

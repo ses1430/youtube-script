@@ -1,0 +1,190 @@
+---
+title: Digital Freedom, AI Regulation, and the Fight for the Western Internet | The a16z Show
+uploader: a16z
+channel: a16z
+channel_url: https://www.youtube.com/channel/UC9cn0TuPq4dnbTY-CBsm8XA
+duration: 1375
+upload_date: 20260504
+webpage_url: https://www.youtube.com/watch?v=fUI0CNg1hCc
+id: fUI0CNg1hCc
+categories:
+  - Science & Technology
+tags:
+  - a16z
+  - andreessen horowitz
+---
+
+# Digital Freedom, AI Regulation, and the Fight for the Western Internet | The a16z Show
+
+AI is going to be more important, not less important, and so the proliferation of a western AI stack should be a top priority for anyone who cares about freedom.
+The rules around AI are changing fast. There's a lot of regulation abroad around digital safety and misinformation that's in some ways becoming the petri dish for lobbying groups and organizations in America to bring that here.
+I think when we send signals in this policy domain, they should be signals that are consistent with free speech.
+The economist Tyler Cowen talks about AI with a western soul, and I completely agree with him that that is the greatest soft power tool we can possess.
+How can the U.S. government encourage private sector to encourage free speech at their companies, even if they don't have the ability to buy a company like Elon does and put his fingerprint on it?
+I think we need to...
+Please welcome to the stage Catherine Boyle and Sarah Rogers.
+Well, Under Secretary Rogers, it is an honor to have you here, as you've been, I would argue, one of the most vocal proponents of free speech and digital freedom in this administration.
+Free speech and anti-censorship are arguably, I would say, the most important American battles of our time.
+Now, a lot of people do not know how free speech and these battles are linked to public diplomacy in the State Department.
+So, to start, what is public diplomacy?
+So, one of my favorite parts of getting this nomination was watching all my friends and family wait a polite beat to ask that question after congratulating me.
+So, when we think of diplomacy, we're ordinarily thinking about the relationship between the American government and foreign governments.
+To ambassadors, shake hands, strike a minerals deal.
+That's diplomacy.
+Public diplomacy is different.
+It is my privilege and charge to lead the relationship between the American government and the foreign public.
+And so, that includes things like educational and cultural exchanges like the Fulbright Program.
+It includes our fast-twitch media response assets and global public affairs.
+And more relevantly than ever, it includes our engagement with the information environment.
+The backdrop, the operating system on which these conversations run so that under the prior administration included things like global engagement center censorship efforts that were the subject of the Murphy Supreme Court litigation.
+Where the State Department, along with other organs of the executive branch, would contact Twitter or Meta and say, you know, we think that these Charlie Kirk tweets are disinformation, you should take them down.
+That apparatus resided inside my part of the State Department.
+And in the State Department's reorganization, I acquired the Digital Freedom Office, which is basically, under my tenure, the opposite of that.
+So, I'm pursuing transparency, truth, and reconciliation on prior censorship.
+And I am making freedom of expression a primary prong of our public diplomacy.
+Yeah.
+No, no.
+And it's, I mean, it's definitely been something to watch.
+I mean, we live in a world where the Internet mostly works in America.
+You can text, you can post, you can send memes, you can criticize our government.
+But in a lot of countries, that is just not the case, as we're seeing a lot of surprising countries as well.
+When the U.S. says it supports Internet freedom abroad, and you've been very vocal about this, and even places like Europe, you know, what does it mean in practice?
+So, this has gone through different permutations over time.
+If you think back to the era of the Arab Spring and Occupy Wall Street, I think the foreign policy establishment was really excited about Internet freedom,
+because they saw correctly that it made conversation more disintermediated.
+It enabled a populist periphery to kind of challenge legacy authorities.
+And that was generally good for openness and freedom, and generally bad for entrenched, closed, controlling institutions.
+And then, you know, after the Arab Spring, I think people got nervous that there might be an American Spring.
+And 2016, Trump-Brexit brought a lot of those anxieties to the fore, and you saw efforts to transform a lot of government, Internet freedom, and digital diplomacy initiatives into kind of, you know, quote-unquote disinformation curation, the suppression of, you know, what they call the adverse narratives.
+And getting inside this apparatus and seeing it firsthand, what you really see is a lot of people involved in these efforts had pro-social intentions.
+They wanted an ecosystem where people had more access to true information, where people were less likely to be misled by adversary information operations, which are a real thing.
+I mean, especially in the age of AI, we are seeing foreign adversaries intentionally introduce malicious false propaganda into our information arteries.
+And I think to combat that, you know, people just kind of went overboard.
+And we see this in every era where technology drastically changes and the structure of human communication changes.
+Like when the telegraph was invented, people were worried that that was going to diminish everyone's attention span.
+When the printing press was invented, all these heretics are going to be able to print their own Bibles.
+What are we going to do about it?
+And we're living through a moment that's on par with or exceeds any of those communications revolutions.
+So naturally, there is an urge to kind of put the innovation back in the bottle or at least harness it and control it so that legacy institutions can decide who it's for and what it does.
+And I think it's not consistent with American values or American interests to use or to better technology that way.
+I think we want to use it to make people free.
+I'd love to dive into that more because digital freedom is a national security issue, especially with our adversaries.
+You touched on it where it's never been easier for, you know, adversarial nations to create disinformation and to flood our channels.
+What was the old mandate for digital freedom under the previous administration and how have you changed it?
+What are the priorities for you?
+So the State Department has undergone a reorganization and I've actually acquired new authorities in the National Defense Authorization Act to promote internet freedom that my office didn't even have before.
+And so we had a digital freedom team that did some good work they're still doing.
+So combating malware and spyware, foreign cyber attacks, you know, we are still doing that work.
+I think our digital freedom office was involved in so-called information integrity initiatives with some international organizations that did a mix of good things and bad things.
+Like I'm all for promoting content provenance, helping people determine, you know, if you're looking at a piece of content online where it came from, whether it's AI generated and whether it's true, we just want to empower users to do that rather than institute these kind of opaque tyrannical choke points far upstream of where the user sees the information.
+You know, you know, these NGOs that are funded by the government that make decisions about, you know, what, what arguments about pediatric transgender medicine should be, you'd be allowed to see.
+Like that was the kind of thing that was countenanced before that's not countenanced now.
+And we're much friendlier to initiatives like censorship, circumvention, VPNs, and to initiatives like X's community notes that put that power in the hands of the users or the crowd in a way that's transparent.
+Yeah, yeah, no, and, and, you know, we've talked about on the stage today, sort of the project Maven moment as the turning point for tech and American dynamism.
+When you think about it, is there a project Maven moment that you would point to with the EU and other governments and their current attacks on free speech, which I know you've been spearheading for the administration?
+So I love the touchstone to project Maven because I feel like most people in tech and in this room kind of think of it in a double-edged way.
+So project Maven was the catalyzed awareness that tech innovation and national security were one interest and project Maven also sparked some very ideologically driven employee revolts at Google.
+And, you know, I think both of those things are on everyone's mind now with the proliferation of AI, which all of the smart money knows, and everyone in this room knows that AI is the next thing and all of the policy makers know it too.
+The economist Tyler Cowen has this great phrase. He talks about AI with a Western soul. And I completely agree with him that that is the greatest soft power tool we can possess AI that reasons in an individualistic way, a rules-based way that prioritizes user consent, for example, those are all Western principles, and that is going to be, you know, the underlying reasoning model on which so much of the world's communication and commerce runs.
+And so the proliferation of a Western AI stack is really, it's a top priority for our entire administration. It should be a top priority for anyone who cares about freedom.
+You asked about, you know, a similar catalyzing moment with like EU and let's say kind of foreign allied tech regulation.
+And I think, you know, one question I get when I engage on these freedom of expression issues in places like EU and UK is, why are you being so hard on us? You know, Russia and China censor the internet.
+And the answer is, you know, we are much harder on Russia and China. You know, we treat these countries as adversaries in several key arenas.
+But when Russia and China censor the internet, they just firewall it off. They don't purport to levy fines on American companies for allowing Americans to engage in First Amendment protected speech on American political issues.
+The EU did that. I think, you know, one key moment in August 2024 was when a now former EC European Commission official Terry Breton sent a letter to Elon Musk threatening him with regulatory penalties if he aired an upcoming interview on X with then presidential candidate, former president, and now current President Trump.
+Yes. And president, the interview hadn't even happened yet. So it wasn't like President Trump had said something the EU wanted to censor.
+It was more like if you allow Donald Trump to speak on your platform, you will face like you will face regulatory liability likely in the EU.
+Then in the same letter, Breton makes reference to another ongoing investigation against X that ostensibly they say had nothing to do with speech.
+This is this is the investigation that recently culminated in a 120 million euro fine.
+This is the investigation about are your blue checks assigned in an authentic, truthful way is your algorithm transparent enough.
+And in that letter, he basically says, if you let President Trump speak, that is going to increase your exposure to adverse findings of liability in this other regulatory crackdown.
+So this is I mean, this is an issue I litigated on in my private practice before the Supreme Court, before I came into the administration.
+The kind of viewpoint skewed enforcement of ostensibly content neutral regulations is both insidious and it's inevitable when you have something that's this politically pitched.
+So I think the idea that, you know, these kind of European censorship laws, laws that make it illegal to insult a politician as it is in Germany, for example, or illegal to, you know, blaspheme Islam as some prosecutors argued recently in the UK.
+But when you transpose those to a transnational internet and then tell American companies that they can face, face fines up to 6% of global revenue.
+If they transgress those laws, you force us to have this international conversation and the conversation that I've had in some context, like on X is kind of confrontational and feisty.
+But there are other conversations that happen in other diplomatic contexts that I think have been constructive and we have to have the conversation now because digital space is going to be more important, not less important for international relations and commerce.
+AI is going to be more important, not less important.
+We need rules of the road that preserve that that spirit of liberty and creation that enabled all the founders in this room to build what they did and made America the engine of innovation that it is.
+Absolutely.
+And I want to get more into that because, yes, you've been very public.
+You've led, you know, some of the legal sanctions on some of these bureaucrats who did try to harm American companies.
+And as you said, the State Department is also, you know, Secretary Rubio went over and gave, I would say, a triumphant speech about, you know, the relationship between the EU and the U.S.
+and how that needs to be, you know, forged so that we can jointly make sure that we are the leaders of the free world and that our adversaries, particularly on things like AI, don't take control.
+So, I mean, I would love to understand, you know, how is that relationship going in your opinion?
+What are some of the things that have changed in the last several months in terms of these tactics working to make sure we have internet freedom?
+You know, I think we really value these alliances.
+And as Secretary Rubio underscored in Munich, we engage with Europe on these issues because we want our European allies to be safe, strong and prosperous like us.
+Not just so that they can defend themselves vis-a-vis NATO, but because we comprise one civilization and we have a lot of shared interests.
+And if you engage with Europeans bilaterally or multilaterally, they will all affirm and I think a lot of them believe that free expression is one of our shared interests.
+So I think as a lot of these regulatory actions kind of reach their final stages and we have, we get the opportunity to kind of negotiate and go back and forth on specifics.
+It's really my hope that constructive progress can be made, not to the point where we have identical speech regimes in all of these countries,
+but to the point where there's not an insidious like sweeping censorship contagion as the House Judiciary GOP's recent investigation suggested.
+Now, I love that you brought up Tyler Cowen's brilliant quote on AI with a Western soul.
+I think that's a very important and kind of pithy way to put it, but a lot of people in this room are building with AI right now and the rules around AI are changing fast.
+There's a lot of regulation abroad around digital safety and misinformation that's in some ways becoming the petri dish for lobbying groups and organizations in America to bring that here.
+Maybe tell some of us what the most troubling legislation you're seeing is in different pockets of the world and what tech should do to combat these sort of free speech laws.
+I love that question.
+So I'll talk about the AI regulatory landscape and then, you know, what tech should do is a whole separate juicy question that I'd love to get into.
+So I think with AI, copyright is a big issue.
+So there are kind of bones of the Internet that we take for granted that are built into its structure because the Internet grew up in America.
+So one of those is CDA 230.
+That's why all these platforms exist because you can, you can publish, you know, third party content without being exposed to the same range of legal liabilities that a newspaper necessarily would for airing the same.
+CDA 230 is one of those structural, structural features of the Internet that has made it what it is.
+It is actually an artifact of American law, which a lot of people don't appreciate.
+Another is the fair use doctrine.
+So we've seen a lot of good rulings from courts that training AI is fair use.
+If you showed a class of kindergartners, you know, a library of books and they learned from it, that teaching that class of kindergartners would be fair use.
+So if you pay for the same books and then you use them to train an LLM, a lot of courts are saying that's also fair use, which is great.
+I think we are seeing regulatory temptations in other countries, including perhaps the EU to treat copyright in a different way, which would be very devastating.
+And similarly, on the IP front, there's a lot of interest in transparency, which is understandable.
+But if you force companies to disclose aspects of the AI that let foreign adversaries, for example, reverse engineer the model weights, you're really compromising the American and the Western competitive edge.
+I also think that it would be very dangerous for AI to be subject to some of the content regulations that Europe currently imposes on what they call very large online platforms and very large online search engines.
+So there's this, you know, one frustrating aspect as an American lawyer dealing with foreign laws is you expect statutes, especially statutes that impose potential criminal liability or serious civil liability to be very specific.
+And these statutes just kind of say you have to do risk assessments for all of these things, risk assessments for hate speech, risk assessments for speech that could, you know, adversely affect civil discourse or hurt someone's well-being.
+And what does that mean? Does it mean the AI is too, too good and people use it too much and it hurts their well-being and especially with an LLM you anyone who develops these things knows that you can be very careful and you can impose a lot of safety architecture, but it will emit unpredictable responses sometimes.
+And I've seen draft legislation that imposes like strict criminal liability if the LLM is even capable of generating certain kinds of content.
+And I don't mean child pornography, I mean like, you know, content that wouldn't might not even be seen under the First Amendment.
+And I think that kind of strict liability regime that degrades sort of the CDA 230 protection layer and adversely in a sense against kind of creative training of models is I don't like to see it.
+I want to I know you've been watching the Department of War's negotiations with various LLM companies and you're a lawyer as are several of the undersecretaries at State.
+Who've been very vocal on it, maybe talk us through your views on contracting with the Department of War and maybe more broadly, you know, how to think about AI and free speech and alignment in a national security content.
+You know, look, I think we have several great AI companies in the United States and I defer to lawyers at DW and elsewhere on, you know, which of them meet certain statutory thresholds.
+But I think what is essential from a national security national defense perspective is that AI keeps its Western soul and that these really important debates about what, you know, what kill shot the the autonomous weapon should take or what the scope of data synthesis should be.
+These important debates should happen in the way that they've always happened under our Constitution, which is in courts and on State House steps and in these crucibles of democratic deliberation.
+They shouldn't be subject to the fiat of Silicon Valley executives or tech workers who, you know, we've seen, you mentioned, you know, woke tech workers in a prior era.
+Like we have seen tech workers make decisions, for example, that you should, it should not be permissible on Twitter to call a, a convicted sex offender a male, which he is.
+I mean, that was a decision that tech workers made and they're entitled to that opinion.
+But the reason that we have these democratic deliberative bodies and processes that have served us so well for 250 years is so that we can have, you know, these, these courts, which we've like crafted to be deliberative and careful.
+Think seriously about questions like unlawful search and seizure and what is too invasive and, you know, what kind of surveillance should be allowed and then write down in a principled, consistent way what positions we should abide by.
+And so maybe it's because I'm a lawyer, but I think rule of law needs to be a touchstone and I think you've seen that reflected in some of the administration's positions.
+Absolutely. And going back to something you said about, you know, we've referred a lot in this conversation to Twitter and now X.
+I would argue that it's the most consequential moment in terms of Elon buying Twitter, kind of, you know, displacing the trust and safety team there and kind of, you know, changing, I would say, the kind of nature of free speech for, for a lot of, a lot of the country with that movement.
+But it's not something that can be done, you know, it's not a playbook that can be easily replicated. Elon can do it, but not many companies can.
+So I guess if you have some advice for the people in this room or the companies in this room, how can the U.S. government encourage private tech, private sector to encourage free speech at their companies, even if they don't have the sort of ability to buy a company like Elon does and sort of put his, his fingerprint on.
+So I can think of several ways and I'm pursuing all of them as best as best I can for the government to encourage private companies to favor free speech.
+One is just not to create regulatory cudgels that can be wielded in a capricious, arbitrary way like we've seen in Europe with this blue check investigation, for example, or like we've seen in some of these debanking cases.
+So I represented the NRA in a prominent case where the regulations being enforced were ostensibly viewpoint neutral ones, but there was strong evidence that they were being enforced disproportionately against banks that allowed pro-gun groups to contract for financial services and we've seen that before.
+So we tried to make, we should have a regulatory environment that's like crisp and principled where it's always clear what you have to do and what you can do to comply with the law.
+That's one thing we can do.
+Another thing we can do is we can, you know, look, I mean, to the extent that we regulate tech companies and there's going to be some regulation there already is as with any emerging industry, we should have regulations that favor viewpoint neutrality.
+And I think we've seen since, you know, 2020 and especially since 2024, we've really seen the tech industry kind of come to the side of free speech in ways that it hadn't before, catalyzed significantly by Elon's purchase of X.
+And that's great.
+And I think a lot of, a lot of founders are not only patriotic, but they have that kind of gray tribe freedom impulse in them.
+And so I think it's natural, but I think, you know, we need to, to the extent that there are incentives in our law favoring one kind of content moderation or another, we need to favor viewpoint neutrality.
+Now view, I use the phrase viewpoint neutrality deliberately because, you know, that's a concept out of First Amendment law, but that doesn't mean that founders shouldn't try or shouldn't offer users the tools to curate and navigate the information environment in other ways.
+So spam content, pornographic content will behave differently than our content.
+People have more negative engagements with it.
+And if you offer people the ability to see less of that in their feeds or to see less content with foreign providence, for example, that's not viewpoint based suppression.
+That's just, that is not a viewpoint based distinction.
+And I think our regulations should be kinder to that kind of content moderation.
+And I think, obviously, as government officials, we need to stand up for our companies and our industry when their interests and American political freedoms are threatened.
+So if the U.S. government, to go back to that Terry Breton letter, if the U.S. government threatened Le Monde or threatened Vivendi, these are French platforms for hosting an interview with Emmanuel Macron,
+the French government wouldn't stand for it.
+And we shouldn't stand for it.
+And that's what these sanctions signals.
+And that's, you know, obviously we have a lot of foreign policy priorities in the administration, and these really are critical allies with whom we share so much.
+But I think when we send signals in this policy domain, they should be signals that are consistent with free speech.
+Absolutely.
+Well, as we always say, we invest and support the Second Amendment so that we can enjoy the first.
+Under Secretary Rogers, thank you so much for being here and for the work you're doing.
+Thank you so much for having me.
